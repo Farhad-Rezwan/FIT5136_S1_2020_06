@@ -14,6 +14,15 @@ public class SelectionCriteria {
     private ArrayList<String> languageSpoken;
 
     public SelectionCriteria() {
+        qualification = new ArrayList<>();
+        maximumAge = 0;
+        minimumAge = 0;
+        experience = new ArrayList<>();
+        occupation = new ArrayList<>();
+        healthRecord = "";
+        criminalRecord = "";
+        computerSkill = "";
+        languageSpoken = new ArrayList<>();
     }
 
     public SelectionCriteria(ArrayList<String> qualification,
