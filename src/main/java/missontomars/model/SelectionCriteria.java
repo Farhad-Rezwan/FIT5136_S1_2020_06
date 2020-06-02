@@ -1,3 +1,5 @@
+package main.java.missontomars.model;
+
 import java.util.ArrayList;
 
 public class SelectionCriteria {

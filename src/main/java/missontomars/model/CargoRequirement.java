@@ -1,3 +1,7 @@
+package main.java.missontomars.model;
+
+import main.java.missontomars.model.Cargo;
+
 import java.util.ArrayList;
 import java.util.List;
 

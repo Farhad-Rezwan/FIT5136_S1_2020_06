@@ -1,3 +1,5 @@
+package main.java.missontomars.model;
+
 public class Cargo {
     private int cargo_Id;
     private String cargo;

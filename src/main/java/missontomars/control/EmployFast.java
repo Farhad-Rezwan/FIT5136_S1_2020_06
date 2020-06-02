@@ -1,3 +1,8 @@
+package main.java.missontomars.control;
+
+import main.java.missontomars.model.Mission;
+import main.java.missontomars.model.SelectionCriteria;
+
 import java.util.Scanner;
 
 public class EmployFast {
