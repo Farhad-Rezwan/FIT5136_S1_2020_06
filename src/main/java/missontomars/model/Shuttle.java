@@ -1,4 +1,4 @@
-package main.java.missontomars.model.Shuttle;
+package main.java.missontomars.model;
 
 public class Shuttle {
     private int id;
