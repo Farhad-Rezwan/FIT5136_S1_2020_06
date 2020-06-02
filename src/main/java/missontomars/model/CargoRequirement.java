@@ -52,4 +52,7 @@ public class CargoRequirement {
     public void setCargoList(ArrayList<Cargo> cargoList) {
         this.cargoList = cargoList;
     }
+    public void displayCargoRequirement() {
+        System.out.println("Information need to edit this");
+    }
 }
