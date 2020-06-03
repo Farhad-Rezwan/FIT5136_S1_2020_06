@@ -1,6 +1,13 @@
 package main.java.missontomars.control;
 
+<<<<<<< Updated upstream
 import main.java.missontomars.model.*;
+=======
+import main.java.missontomars.model.Feature2.GetShuttle;
+import main.java.missontomars.model.Mission;
+import main.java.missontomars.model.SelectionCriteria;
+import main.java.missontomars.model.Shuttle;
+>>>>>>> Stashed changes
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,6 +15,7 @@ import java.util.Scanner;
 public class MissionToMars {
     ArrayList<Mission> listOfMission;
     ArrayList<Shuttle> listOfShuttle;
+
 
     public MissionToMars(ArrayList<Mission> listOfMission, ArrayList<Shuttle> listOfShuttle) {
         this.listOfMission = listOfMission;
@@ -18,6 +26,11 @@ public class MissionToMars {
     public static void main(String ...args) {
         System.out.println("hellow form mission to mars");
 
+
+        //Feature2 starts here
+        GetShuttle getShuttle = new GetShuttle();
+        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
+        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
     }
 
     public ArrayList<Mission> getListOfMission() {
