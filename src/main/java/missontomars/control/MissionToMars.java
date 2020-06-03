@@ -1,13 +1,13 @@
 package main.java.missontomars.control;
 
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 import main.java.missontomars.model.*;
-=======
+//=======
 import main.java.missontomars.model.Feature2.GetShuttle;
 import main.java.missontomars.model.Mission;
 import main.java.missontomars.model.SelectionCriteria;
 import main.java.missontomars.model.Shuttle;
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -75,6 +75,8 @@ public class MissionToMars {
             showOverallInformation(select, mission);
         }
     }
+
+    private void idToEditView(){}
 
     private void missionEditMenu(int select, Mission mission) {
 
@@ -206,12 +208,12 @@ public class MissionToMars {
         ArrayList<String> newQua = s.getQualification();
         newQua.add(qua);
         s.setQualification(newQua);
-        missionEditMenu(select, s);
+        //missionEditMenu(select, s);
     }
 
 
 
-    private void idToEditView() {
+    /*private void idToEditView() {
         System.out.println("Need Edit: you are in id to edit view");
         System.out.println("Mission 1, Mission 2, mission  3");
         for (int i = 0; i < listOfMission.size(); i++){
@@ -227,12 +229,12 @@ public class MissionToMars {
             viewAllCre(s);
         }
 
-    }
+    }*/
 
 
 
 
-    private void viewMissionInformation(Mission m) {
+    /*private void viewMissionInformation(Mission m) {
         System.out.println("Countries: " +);
         System.out.println();
         System.out.println("years of work experience: " + createWorExp(s));
@@ -249,7 +251,7 @@ public class MissionToMars {
 //            criteriaMenu(s);
         }
 
-    }
+    }*/
     private String displayCountry(SelectionCriteria s) {
         String exp = "";
         for (int i = 0; i < s.getExperience().size(); i++) {
