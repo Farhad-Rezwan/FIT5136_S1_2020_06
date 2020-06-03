@@ -3,7 +3,6 @@ package main.java.missontomars.control;
 import main.java.missontomars.model.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MissionToMars {
@@ -37,48 +36,32 @@ public class MissionToMars {
         this.listOfShuttle = listOfShuttle;
     }
 
-//    public void loginScreen() {
-//        System.out.println("Wellcome to mission to mars");
-//        System.out.println("Enter your username");
-//
-//    }
 
 
     private void missionCreateMenu(Mission mission) {
         System.out.print("Selected Mission"
-                + "\nPress 1 for country information"
-                + "\nPress 2 for co-ordinator information"
-                + "\nPress 3 for job information"
-                + "\nPress 4 for cargo requirement"
+                + "\nPress 1 for mission name"
+                + "\nPress 2 for mission description"
+                + "\nPress 3 for mission origin"
+                + "\nPress 4 for countries allowed"
                 + "\nPress 5 for launch date"
-                + "\nPress 6 for duration"
-                + "\nPress 7 for status of mission"
-                + "\nPress 8 to view mission created"
+                + "\nPress 6 for destination address"
+                + "\nPress 7 for duration"
+                + "\nPress 8 to view mission type"
+                + "\nPress 9 for job information"
+                + "\nPress 10 for cargo requirement"
+                + "\nPress 11 for status of mission"
+                + "\nPress 12 for mission overall information"
                 + "\nPress 0 to back");
-        int select = valueSelect(0, 8);
+        int select = valueSelect(0, 11);
         if (select == 0) {
             idToEditView();
-        } else if (0 < select & select < 9) {
+        } else if (0 < select & select < 12) {
             missionEditMenu(select, mission);
-        } else if (select == 9) {
-//            viewAllCre(s);
+        } else if (select == 12) {
+            showOverallInformation(select, mission);
         }
     }
-
-
-//    int id;
-//    String missionName;
-//    String missionDescription;
-//    String missionOrigin;
-//    List<String> countriesAllowed;
-//    String  launchDate;
-//    List<String> destinationAddress;
-//    int duration;
-//    String status;
-//    List<String> missionType;
-//    ArrayList<Job> job;
-//    CargoRequirement cargoRequirement;
-//    private SelectionCriteria selectionCriteria;
 
     private void missionEditMenu(int select, Mission mission) {
 
@@ -101,6 +84,7 @@ public class MissionToMars {
         } else if (select == 9) {
             for (int i = 0; i < mission.getJob().size(); i++) System.out.println(mission.getJob().get(i));
         } else if (select == 10) mission.getCargoRequirement().displayCargoRequirement();
+        else if (select == 11) System.out.println(mission.getStatus());
 
         int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
         while (editSelect < 0 || editSelect > 2) {
@@ -109,17 +93,98 @@ public class MissionToMars {
         if (editSelect == 1) {
 
             switch (select) {
-                case 1: addMissionName(); break;
-                case 2: addMissionDesceription(); break;
-                case 3: addMissionOrigin(); break;
-                case 4: addLaunchData(); break;
-                case 6: addDestinationAddress(); break;
-                case 7: addDuration(); break;
-                case 8: addMissionType(); break;
-                case 9: addJob(); break;
-                case 10: addCargoRequirement(); break;
+                case 1: addMissionName(select, mission); break;
+                case 2: addMissionDescription(select, mission); break;
+                case 3: addMissionOrigin(select, mission); break;
+                case 4: addCountriesAllowed(select, mission); break;
+                case 5: addLaunchData(select, mission); break;
+                case 6: addDestinationAddress(select, mission); break;
+                case 7: addDuration(select, mission); break;
+//                case 8: addMissionType(select, mission); break;
+                case 9: addJob(select, mission); break;
+                case 10: addCargoRequirement(select, mission); break;
+                case 11: addStatus(select, mission); break;
             }
         }
+    }
+
+    private void addMissionName(int select, Mission mission) {
+        System.out.print('\u000C');
+        String missionName = inputString("Please insert mission name: ");
+        mission.setMissionName(missionName);
+        missionEditMenu(select, mission);
+    }
+
+
+    private void addMissionDescription(int select, Mission mission){
+        System.out.print('\u000C');
+        String description = inputString("Please insert mission description: ");
+        mission.setMissionDescription(description);
+        missionEditMenu(select, mission);
+    }
+
+    private void addMissionOrigin(int select, Mission mission) {
+        System.out.print('\u000C');
+        String origin = inputString("Please insert mission origin: ");
+        mission.setMissionDescription(origin);
+        missionEditMenu(select, mission);
+    }
+
+    private void addCountriesAllowed(int select, Mission mission) {
+        System.out.print('\u000C');
+        String country = inputString("Please add the countries allowed");
+        ArrayList<String> countries = (ArrayList<String>) mission.getCountriesAllowed();
+        countries.add(country);
+        mission.setCountriesAllowed(countries);
+        missionEditMenu(select, mission);
+    }
+
+    private void addLaunchData(int select, Mission mission){
+        System.out.print('\u000C');
+        String country = inputString("Please add the countries allowed");
+        ArrayList<String> countries = (ArrayList<String>) mission.getCountriesAllowed();
+        countries.add(country);
+        mission.setCountriesAllowed(countries);
+        missionEditMenu(select, mission);
+    }
+    private void addDestinationAddress(int select, Mission mission) {
+        System.out.print('\u000C');
+        String country = inputString("Please add the destination address");
+        ArrayList<String> countries =  mission.getCountriesAllowed();
+        countries.add(country);
+        mission.setCountriesAllowed(countries);
+        missionEditMenu(select, mission);
+
+    }
+
+    private void addDuration(int select, Mission mission) {
+        System.out.print('\u000C');
+        int duration = inputInt("Please insert duration in months");
+        mission.setDuration(duration);
+        missionEditMenu(select, mission);
+    }
+
+//    private void addMissionType(int select, Mission mission) {
+//        System.out.print('\u000C');
+//        int duration = inputInt("Please insert duration in months");
+//        mission.setDuration(duration);
+//        missionEditMenu(select, mission);
+//    }
+
+    private void addJob(int select, Mission mission) {
+
+    }
+
+    private void addCargoRequirement(int select, Mission mission){
+
+    }
+
+    private void addStatus(int select, Mission mission) {
+        
+    }
+
+    private void showOverallInformation(int select, Mission mission) {
+
     }
 
     private void addQualification(int select, SelectionCriteria s) {
@@ -128,7 +193,7 @@ public class MissionToMars {
         ArrayList<String> newQua = s.getQualification();
         newQua.add(qua);
         s.setQualification(newQua);
-        criteriaEditMenu(select, s);
+        missionEditMenu(select, s);
     }
 
 
@@ -168,7 +233,7 @@ public class MissionToMars {
             back = inputInt("Press 0 to go back");
         }
         if (back == 0) {
-            criteriaMenu(s);
+//            criteriaMenu(s);
         }
 
     }
@@ -227,6 +292,13 @@ public class MissionToMars {
             }
         }
         return integer;
+    }
+
+    public String inputString(String displayMessage) {
+        System.out.println(displayMessage);
+        Scanner scan = new Scanner(System.in);
+        String temp = scan.nextLine();
+        return temp;
     }
 
 

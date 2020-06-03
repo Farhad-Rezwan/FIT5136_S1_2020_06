@@ -10,12 +10,12 @@ public class Mission {
     String missionName;
     String missionDescription;
     String missionOrigin;
-    List<String> countriesAllowed;
+    ArrayList<String> countriesAllowed;
     String  launchDate;
-    List<String> destinationAddress;
+    ArrayList<String> destinationAddress;
     int duration;
     String status;
-    List<String> missionType;
+    ArrayList<String> missionType;
     ArrayList<Job> job;
     CargoRequirement cargoRequirement;
     private SelectionCriteria selectionCriteria;
@@ -26,9 +26,9 @@ public class Mission {
     }
 
     public Mission(int id, String missionName, String missionDescription,
-                   String missionOrigin, List<String> countriesAllowed, String launchDate,
-                   List<String> destinationAddress, int duration, String status,
-                   List<String> missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
+                   String missionOrigin, ArrayList<String> countriesAllowed, String launchDate,
+                   ArrayList<String> destinationAddress, int duration, String status,
+                   ArrayList<String> missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
                    SelectionCriteria selectionCriteria) {
         this.id = id;
         this.missionName = missionName;
@@ -85,11 +85,11 @@ public class Mission {
         this.missionOrigin = missionOrigin;
     }
 
-    public List<String> getCountriesAllowed() {
+    public ArrayList<String> getCountriesAllowed() {
         return countriesAllowed;
     }
 
-    public void setCountriesAllowed(List<String> countriesAllowed) {
+    public void setCountriesAllowed(ArrayList<String> countriesAllowed) {
         this.countriesAllowed = countriesAllowed;
     }
 
@@ -101,11 +101,11 @@ public class Mission {
         this.launchDate = launchDate;
     }
 
-    public List<String> getDestinationAddress() {
+    public ArrayList<String> getDestinationAddress() {
         return destinationAddress;
     }
 
-    public void setDestinationAddress(List<String> destinationAddress) {
+    public void setDestinationAddress(ArrayList<String> destinationAddress) {
         this.destinationAddress = destinationAddress;
     }
 
@@ -129,7 +129,7 @@ public class Mission {
         return missionType;
     }
 
-    public void setMissionType(List<String> missionType) {
+    public void setMissionType(ArrayList<String> missionType) {
         this.missionType = missionType;
     }
 
