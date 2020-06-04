@@ -3,6 +3,7 @@ package main.java.missontomars.model;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Mission {
@@ -11,7 +12,7 @@ public class Mission {
     String missionDescription;
     String missionOrigin;
     ArrayList<String> countriesAllowed;
-    String  launchDate;
+    Date launchDate;
     ArrayList<String> destinationAddress;
     int duration;
     String status;
@@ -26,7 +27,7 @@ public class Mission {
     }
 
     public Mission(int id, String missionName, String missionDescription,
-                   String missionOrigin, ArrayList<String> countriesAllowed, String launchDate,
+                   String missionOrigin, ArrayList<String> countriesAllowed, Date launchDate,
                    ArrayList<String> destinationAddress, int duration, String status,
                    ArrayList<String> missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
                    SelectionCriteria selectionCriteria) {
@@ -93,11 +94,11 @@ public class Mission {
         this.countriesAllowed = countriesAllowed;
     }
 
-    public String getLaunchDate() {
+    public Date getLaunchDate() {
         return launchDate;
     }
 
-    public void setLaunchDate(String launchDate) {
+    public void setLaunchDate(Date launchDate) {
         this.launchDate = launchDate;
     }
 
