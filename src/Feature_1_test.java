@@ -7,7 +7,7 @@ public class Feature_1_test {
 
     public static void main(String ...args) {
         MissionToMars missionToMars = new MissionToMars();
-        System.out.println("hellow form mission to mars");
+        System.out.println("hello form mission to mars");
 
         Mission m = new Mission();
         missionToMars.login();
