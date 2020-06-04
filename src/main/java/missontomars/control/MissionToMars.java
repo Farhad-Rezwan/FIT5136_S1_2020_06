@@ -14,6 +14,7 @@ public class MissionToMars {
     String userType;
 
 
+
     public MissionToMars(ArrayList<Mission> listOfMission, ArrayList<Shuttle> listOfShuttle) {
         this.listOfMission = listOfMission;
         this.listOfShuttle = listOfShuttle;
@@ -28,6 +29,11 @@ public class MissionToMars {
 
     public static void login() {
 
+
+        //Feature2 starts here
+        GetShuttle getShuttle = new GetShuttle();
+        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
+        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
     }
 
     public ArrayList<Mission> getListOfMission() {
@@ -72,6 +78,8 @@ public class MissionToMars {
             showOverallInformation(select, mission);
         }
     }
+
+    private void idToEditView(){}
 
     private void missionEditMenu(int select, Mission mission) {
 
@@ -209,6 +217,7 @@ public class MissionToMars {
 
     }
 
+<<<<<<< HEAD
 //    private void addQualification(int select, SelectionCriteria s) {
 //        System.out.print('\u000C');
 //        String qua = inputString("Please add the qualification (only one at a time)");
@@ -217,8 +226,32 @@ public class MissionToMars {
 //        s.setQualification(newQua);
 //        missionEditMenu(select, s);
 //    }
+=======
+    private void addQualification(int select, SelectionCriteria s) {
+        System.out.print('\u000C');
+        String qua = inputString("Please add the qualification (only one at a time)");
+        ArrayList<String> newQua = s.getQualification();
+        newQua.add(qua);
+        s.setQualification(newQua);
+        //missionEditMenu(select, s);
+    }
 
 
+
+    /*private void idToEditView() {
+        System.out.println("Need Edit: you are in id to edit view");
+        System.out.println("Mission 1, Mission 2, mission  3");
+        for (int i = 0; i < listOfMission.size(); i++){
+            System.out.print((i + 1) + listOfMission.get(i).getMissionName());
+        }
+        int select = valueSelect(0, 8);
+>>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
+
+
+<<<<<<< HEAD
+=======
+    }*/
+>>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
 
 //    private void idToEditView() {
 //        System.out.println("Need Edit: you are in id to edit view");
@@ -240,6 +273,7 @@ public class MissionToMars {
 
 
 
+<<<<<<< HEAD
 
 //    private void viewMissionInformation(Mission mission) {
 //        System.out.println("Countries: " +);
@@ -259,6 +293,26 @@ public class MissionToMars {
 //        }
 //
 //    }
+=======
+    /*private void viewMissionInformation(Mission m) {
+        System.out.println("Countries: " +);
+        System.out.println();
+        System.out.println("years of work experience: " + createWorExp(s));
+        System.out.println("occupations: " + createOcc(s));
+        System.out.println("health records: " + s.getHealthRecord());
+        System.out.println("criminal records: " + s.getCriminalRecord());
+        System.out.println("computer skill: " + s.getComputerSkill());
+        System.out.println("language spoken: " + createLan(s));
+        int back = 1;
+        while (back != 0) {
+            back = inputInt("Press 0 to go back");
+        }
+        if (back == 0) {
+//            criteriaMenu(s);
+        }
+
+    }*/
+>>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
     private String displayCountry(SelectionCriteria s) {
         String exp = "";
         for (int i = 0; i < s.getExperience().size(); i++) {
