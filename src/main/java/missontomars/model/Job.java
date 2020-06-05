@@ -7,6 +7,12 @@ public class Job {
     String jobDescription;
     ArrayList<EmploymentRequirement> employmentRequirements;
 
+    public Job() {
+        this.jobName = "";
+        this.jobDescription = "";
+        employmentRequirements = new ArrayList<>();
+    }
+
     public String getJobName() {
         return jobName;
     }
@@ -37,5 +43,25 @@ public class Job {
 
     public void setEmploymentRequirements(EmploymentRequirement employmentRequirement) {
         this.employmentRequirements.add(employmentRequirement);
+    }
+
+    public String displayJob() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Job information: \n \t");
+
+        // display job name
+        sb.append("\t \tjob name: " + jobName + "\n \t");
+
+        // display job description
+        sb.append("\t \tjob description: " + jobDescription + "\n \t");
+
+        // display employment requirement
+        for (int i = 0; i < employmentRequirements.size(); i++) {
+            sb.append( "\n \t \t \t" + (i + 1) + ": " + employmentRequirements.get(i).displayJobTitles());
+        }
+        sb.append("\n \t");
+
+
+        return sb.toString();
     }
 }

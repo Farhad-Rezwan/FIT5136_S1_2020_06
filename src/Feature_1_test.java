@@ -1,6 +1,7 @@
 import main.java.missontomars.control.MissionToMars;
 import main.java.missontomars.model.Cargo;
 import main.java.missontomars.model.CargoRequirement;
+import main.java.missontomars.model.Job;
 import main.java.missontomars.model.Mission;
 
 import java.lang.reflect.Array;
@@ -50,6 +51,15 @@ public class Feature_1_test {
 
         k.setCargoRequirement(cr);
 
+        Job job = new Job();
+        job.setJobName("This job");
+        job.setJobDescription("This job description");
+        Job job2 = new Job();
+        job2.setJobName("Another job");
+        job2.setJobDescription("Another job description");
+
+        k.setJob(job);
+        k.setJob(job2);
 
         ArrayList<Mission> list = new ArrayList<>();
         list.add(k);

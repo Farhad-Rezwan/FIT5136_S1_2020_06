@@ -24,4 +24,17 @@ public class EmploymentRequirement {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    public String displayJobTitles() {
+        StringBuilder sb = new StringBuilder();
+
+        // display job name
+        sb.append("\t Title name: " + jobTitle + " ");
+
+        // display job description
+        sb.append("Number required: " + numberEmployeeRequired);
+
+        return sb.toString();
+    }
+
 }

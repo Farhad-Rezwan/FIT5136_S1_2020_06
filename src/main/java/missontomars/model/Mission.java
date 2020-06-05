@@ -26,6 +26,7 @@ public class Mission {
       selectionCriteria = new SelectionCriteria();
       missionType = "Planning Phase";
       countriesAllowed = new ArrayList<>();
+      job = new ArrayList<>();
     }
 
     public Mission(int id, String missionName, String missionDescription,

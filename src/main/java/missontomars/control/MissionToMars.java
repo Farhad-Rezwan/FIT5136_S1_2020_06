@@ -63,19 +63,18 @@ public class MissionToMars {
                 + "\nPress 5 for launch date"
                 + "\nPress 6 for destination address"
                 + "\nPress 7 for duration"
-                + "\nPress 8 to view mission type"
-                + "\nPress 9 for job information"
-                + "\nPress 10 for cargo requirement"
-                + "\nPress 11 for status of mission"
-                + "\nPress 12 for mission overall information"
+                + "\nPress 8 for job information"
+                + "\nPress 9 for cargo requirement"
+                + "\nPress 10 for status of mission"
+                + "\nPress 11 for mission overall information"
                 + "\nPress 0 to back"
                 + "\n");
-        int select = valueSelect(0, 12);
+        int select = valueSelect(0, 11);
         if (select == 0) {
             idToEditView();
-        } else if (0 < select & select < 12) {
+        } else if (0 < select & select < 11) {
             missionEditMenu(select, mission);
-        } else if (select == 12) {
+        } else if (select == 11) {
             showOverallInformation(mission);
         }
     }
@@ -123,7 +122,7 @@ public class MissionToMars {
                 if (null != mission.getMissionDescription())
                     str.append("Mission description: " + mission.getMissionDescription());
                 else
-                    str.append("There is no mission discription set");
+                    str.append("There is no mission description set");
                 break;
             case 3:
                 if (null != mission.getMissionOrigin())
@@ -144,7 +143,7 @@ public class MissionToMars {
                 if (null != mission.getLaunchDate())
                     str.append("Mission launch date: " + mission.getLaunchDate());
                 else {
-                    str.append("Mission launch date is not set");
+                    str.append("There is no launch date is not set");
                 }
                 break;
             case 6:
@@ -164,24 +163,19 @@ public class MissionToMars {
                     str.append("There is no duration set for the mission");
                 break;
             case 8:
-                if (null != mission.getMissionType()) {
-                    str.append("Mission type is set to ");
-                } else {
-                    str.append("Start from here");
-                }
-                break;
-            case 9:
-                if (true) str.append(mission.getCargoRequirement().displayCargoRequirement() + " month");
-                else str.append(mission.getDuration() + " months");
-                break;
-            case 10:
                 if (null != mission.getJob()) {
                     for (int i = 0; i < mission.getJob().size(); i++)
-                        str.append(mission.getJob().get(i).getJobName());
+                        str.append( (i + 1) + ": " + mission.getJob().get(i).displayJob());
                 } else
-                    str.append("There is no cargo requirement set");
+                    str.append("There is no job set");
                 break;
-            case 11:
+            case 9:
+                if (null != mission.getCargoRequirement()) {
+                    str.append(mission.getCargoRequirement().displayCargoRequirement() + " month");
+                }
+                else str.append("There is no cargo requirement set");
+                break;
+            case 10:
                 if (null != mission.getStatus())
                     str.append("The mission status is :" + mission.getStatus());
                 else {
@@ -218,14 +212,13 @@ public class MissionToMars {
             case 7:
                 addDuration(select, mission);
                 break;
-//                case 8: addMissionType(select, mission); break;
-            case 9:
-                addJob(select, mission);
+            case 8:
+                getJobId(mission);
                 break;
-            case 10:
+            case 9:
                 addCargoRequirement(select, mission);
                 break;
-            case 11:
+            case 10:
                 addStatus(select, mission);
                 break;
         }
@@ -273,7 +266,7 @@ public class MissionToMars {
     private void addMissionOrigin(int select, Mission mission) {
         System.out.print('\u000C');
         String origin = inputString("Please insert mission origin: ");
-        mission.setMissionDescription(origin);
+        mission.setMissionOrigin(origin);
         missionEditMenu(select, mission);
     }
 
@@ -348,29 +341,176 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
-    // 8.
-//    private void addMissionType(int select, Mission mission) {
-//        System.out.print('\u000C');
-//        int duration = inputInt("Please insert duration in months");
-//        mission.setDuration(duration);
-//        missionEditMenu(select, mission);
-//    }
 
-    // 9.
-    private void addJob(int select, Mission mission) {
+
+    // 8.
+
+    private void jobsShowView(Mission mission) {
+        int numberOfJob = mission.getJob().size();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < numberOfJob; i++) {
+            sb.append((i + 1) + "： " + mission.getJob().get(i).getJobName() + "\n");
+        }
+        System.out.println(sb.toString());
+
+        int jobSelect = inputInt("Select job Number to edit", sb.toString());
+        while (jobSelect < 1 || jobSelect > numberOfJob) {
+            System.out.println(" ");
+            System.out.println(sb.toString());
+            jobSelect = inputInt("Please choose the right option", sb.toString());
+
+        }
+
+        addJob(listOfMission.get(jobSelect - 1));
+        System.out.println("Selected");
 
     }
 
-    //  10.
+
+    private void addJob(Mission mission) {
+        System.out.print("Selected Job"
+                + "\nPress 1 for job name"
+                + "\nPress 2 for job description"
+                + "\nPress 3 for employment requirement"
+                + "\nPress 0 to go back");
+        int select = valueSelect(0, 4);
+        if (select == 0) {
+            jobsShowView(mission);
+        } else if (0 < select & select < 3) {
+            jobEditMenu(select, mission);
+        }
+    }
+
+    private void getJobId(Mission mission) {
+        StringBuilder str = new StringBuilder();
+        if (null != mission.getJob()) {
+            for (int i = 0; i < mission.getJob().size(); i++)
+                str.append( (i + 1) + ": " + mission.getJob().get(i).displayJob());
+        } else
+            str.append("There is no job set");
+
+    }
+
+    private void jobEditMenu(int select, Mission mission) {
+
+        System.out.println(displayHeaderJob(select, mission));
+
+        int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
+        while (editSelect < 0 || editSelect > 2) {
+            editSelect = inputInt("Please select an right option");
+        }
+
+        if (editSelect == 0) {
+            addJob(mission);
+        }
+
+        if (editSelect == 1) {
+            System.out.println(displayHeaderJob(select, mission));
+            addJobEntries(select, mission);
+        }
+
+        if (editSelect == 2) {
+            deleteJobEntries(select, mission);
+        }
+
+        System.out.println(displayHeaderJob(select, mission));
+    }
+
+    private String displayHeaderJob(int select, Mission mission) {
+
+        StringBuilder str = new StringBuilder();
+        System.out.print('\u000C');
+
+
+        switch (select) {
+            case 1:
+                if (null != mission.getJob())
+                    str.append("Job name is set to: " + mission.getMissionName());
+                else
+                    str.append("There is no mission name set");
+                break;
+            case 2:
+                if (null != mission.getMissionDescription())
+                    str.append("Mission description: " + mission.getMissionDescription());
+                else
+                    str.append("There is no mission description set");
+                break;
+            case 3:
+                if (null != mission.getMissionOrigin())
+                    str.append("Mission origin: " + mission.getMissionOrigin());
+                else
+                    str.append("There is no mission origin set");
+                break;
+            case 4:
+                if (mission.getCountriesAllowed().size() > 0){
+                    str.append("Countries allowed");
+                    for (int i = 0; i < mission.getCountriesAllowed().size(); i++)
+                        str.append("  " + (i + 1) + ": " + mission.getCountriesAllowed().get(i));
+                } else {
+                    str.append("There is no countries allowed yet");
+                }
+                break;
+
+        }
+        return str.toString();
+    }
+
+    private void addJobEntries(int select, Mission mission) {
+
+        switch (select) {
+            case 1:
+                addJobName(select, mission);
+                break;
+            case 2:
+                addJobDescription(select, mission);
+                break;
+            case 3:
+                addEmploymentRequirement(select, mission);
+                break;
+        }
+    }
+
+    private void addJobName(int select, Mission mission ) {
+
+    }
+    private void addJobDescription(int select, Mission mission) {
+
+    }
+
+    private void addEmploymentRequirement (int select, Mission mission) {
+
+    }
+
+    private void deleteJobEntries(int select, Mission mission) {
+        switch (select) {
+            case 1:
+                deleteMissionName(select, mission);
+                break;
+            case 2:
+                deleteMissionDescription(select, mission);
+                break;
+            case 3:
+                deleteMissionOrigin(select, mission);
+                break;
+            case 4:
+                deleteCountriesAllowed(select, mission);
+                break;
+        }
+
+    }
+
+
+    //  9.
     private void addCargoRequirement(int select, Mission mission){
 
     }
-    // 11.
+    // 10.
     private void addStatus(int select, Mission mission) {
 
     }
 
-    // 12.
+    // 11.
     private void showOverallInformation(Mission mission) {
         StringBuilder sb = new StringBuilder();
         sb.append(mission.displayMission());
@@ -381,23 +521,9 @@ public class MissionToMars {
         } while (editSelect != 0);
 
         missionCreateMenu(mission);
-
-
-
-
-
-
-
-//        int missionSelect = inputInt("Select mission number to edit", sb.toString());
-//        while (missionSelect < 1 || missionSelect > numberOfMission) {
-//            System.out.println(" ");
-//            System.out.println(sb.toString());
-//            missionSelect = inputInt("Please choose the right option", sb.toString());
-//
-//        }
-
-
     }
+
+
 
 
     private void deleteEntries(int select, Mission mission) {
@@ -423,14 +549,13 @@ public class MissionToMars {
             case 7:
                 deleteDuration(select, mission);
                 break;
-            //                case 8: deleteMissionType(select, mission); break;
-            case 9:
+            case 8:
                 deleteJob(select, mission);
                 break;
-            case 10:
+            case 9:
                 deleteCargoRequirement(select, mission);
                 break;
-            case 11:
+            case 10:
                 deleteStatus(select, mission);
                 break;
         }
