@@ -1,6 +1,7 @@
 package main.java.missontomars.control;
 
 import main.java.missontomars.model.*;
+import main.java.missontomars.model.Feature2.GetShuttle;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,7 +29,6 @@ public class MissionToMars {
 
 
     public static void login() {
-
 
         //Feature2 starts here
         GetShuttle getShuttle = new GetShuttle();
@@ -80,7 +80,6 @@ public class MissionToMars {
         }
     }
 
-    private void idToEditView(){}
 
     private void missionEditMenu(int select, Mission mission) {
 
@@ -133,11 +132,12 @@ public class MissionToMars {
                     str.append("There is no mission origin set");
                 break;
             case 4:
-                if (null != mission.getCountriesAllowed()){
+                if (mission.getCountriesAllowed().size() > 0){
+                    str.append("Countries allowed");
                     for (int i = 0; i < mission.getCountriesAllowed().size(); i++)
-                        str.append((i + 1) + ": " + mission.getCountriesAllowed().get(i));
+                        str.append("  " + (i + 1) + ": " + mission.getCountriesAllowed().get(i));
                 } else {
-                    str.append("There is no countries allowed set");
+                    str.append("There is no countries allowed yet");
                 }
                 break;
             case 5:
@@ -151,12 +151,16 @@ public class MissionToMars {
                 if (null != mission.getDestinationAddress())
                     str.append("Mission destination address: " + mission.getDestinationAddress());
                 else
-                    str.append("There is no launch date set...");
+                    str.append("There is no destination address set");
                 break;
             case 7:
-                if (mission.getDuration() > 0)
-                    str.append(mission.getDuration() + " month");
-                else
+                if (mission.getDuration() > 0){
+                    str.append("Duration is set to: ");
+                    if (mission.getDuration() > 1)
+                        str.append(mission.getDuration() + " days");
+                    else
+                        str.append(mission.getDuration() + " day");
+                } else
                     str.append("There is no duration set for the mission");
                 break;
             case 8:
@@ -276,10 +280,8 @@ public class MissionToMars {
     // 4.
     private void addCountriesAllowed(int select, Mission mission) {
         System.out.print('\u000C');
-        String country = inputString("Please add the countries allowed");
-        ArrayList<String> countries = (ArrayList<String>) mission.getCountriesAllowed();
-        countries.add(country);
-        mission.setCountriesAllowed(countries);
+        String country = inputString("Please insert the name of country");
+        mission.setCountriesAllowed(country);
         missionEditMenu(select, mission);
     }
 
@@ -292,13 +294,50 @@ public class MissionToMars {
 
     // 6.
     private void addDestinationAddress(int select, Mission mission) {
-        System.out.print('\u000C');
-        String country = inputString("Please add the destination address");
-        ArrayList<String> countries =  mission.getCountriesAllowed();
-        countries.add(country);
-        mission.setCountriesAllowed(countries);
-        missionEditMenu(select, mission);
+        System.out.print("Select destination address: "
+                + "\nPress 1 INSIGHT"
+                + "\nPress 2 PHOENIX"
+                + "\nPress 3 VIKING 1"
+                + "\nPress 4 PATHFINDER"
+                + "\nPress 5 OPPORTUNITY"
+                + "\nPress 6 VIKING 2"
+                + "\nPress 7 CURIOSITY"
+                + "\nPress 8 SPIRIT"
+                + "\nPress 0 to back"
+                + "\n");
+        int choise = valueSelect(0, 8);
+        if (choise == 0) {
+            missionEditMenu(select, mission);
+        } else if (0 < choise & choise < 9) {
+            switch (choise) {
+                case 1:
+                    mission.setDestinationAddress("INSIGHT");
+                    break;
+                case 2:
+                    mission.setDestinationAddress("PHOENIX");
+                    break;
+                case 3:
+                    mission.setDestinationAddress("VIKING 1");
+                    break;
+                case 4:
+                    mission.setDestinationAddress("PATHFINDER");
+                    break;
+                case 5:
+                    mission.setDestinationAddress("OPPORTUNITY");
+                    break;
+                case 6:
+                    mission.setDestinationAddress("VIKING 2");
+                    break;
+                case 7:
+                    mission.setDestinationAddress("CURIOSITY");
+                    break;
+                case 8:
+                    mission.setDestinationAddress("SPIRIT");
+                    break;
 
+            }
+        }
+        missionEditMenu(select, mission);
     }
 
     // 7.
@@ -415,16 +454,34 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
     public void deleteCountriesAllowed(int select, Mission mission){
-        mission.setCountriesAllowed(null); // or
-//        deleteCountriesAllowedOneByOne();
+//        mission.setCountriesAllowedAllowed((String) null); // or
 
+        deleteCountriesAllowedOneByOne(select, mission);
         missionEditMenu(select, mission);
     }
 
-    // delete countries allowed one by one.
-//    public void deleteCountriesAllowedOneByOne() {
-//
-//    }
+//     delete countries allowed one by one.
+    public void deleteCountriesAllowedOneByOne(int select, Mission mission) {
+        System.out.println("Country delete menu: ");
+        for (int i = 0; i < mission.getCountriesAllowed().size(); i++) {
+            System.out.println("Press " + (i + 1) + " to delete: " + mission.getCountriesAllowed().get(i));
+        }
+
+        if (mission.getCountriesAllowed().size() != 0)
+            System.out.println("Press " + (mission.getCountriesAllowed().size() + 1) + " to delete all");
+        else
+            System.out.println("Nothing to delete");
+
+        int choise = valueSelect(0, mission.getCountriesAllowed().size() + 1);
+        if (choise == 0) {
+            missionEditMenu(select, mission);
+        } else if (0 < choise & choise < mission.getCountriesAllowed().size() + 1) {
+            mission.getCountriesAllowed().remove(choise - 1 );
+        } else if (choise == mission.getCountriesAllowed().size() + 1) {
+            mission.getCountriesAllowed().clear();
+        }
+
+    }
 
 
     public void deleteLaunchData(int select, Mission mission){
@@ -459,102 +516,7 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
-<<<<<<< HEAD
-//    private void addQualification(int select, SelectionCriteria s) {
-//        System.out.print('\u000C');
-//        String qua = inputString("Please add the qualification (only one at a time)");
-//        ArrayList<String> newQua = s.getQualification();
-//        newQua.add(qua);
-//        s.setQualification(newQua);
-//        missionEditMenu(select, s);
-//    }
-=======
-    private void addQualification(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
-        String qua = inputString("Please add the qualification (only one at a time)");
-        ArrayList<String> newQua = s.getQualification();
-        newQua.add(qua);
-        s.setQualification(newQua);
-        //missionEditMenu(select, s);
-    }
 
-
-
-    /*private void idToEditView() {
-        System.out.println("Need Edit: you are in id to edit view");
-        System.out.println("Mission 1, Mission 2, mission  3");
-        for (int i = 0; i < listOfMission.size(); i++){
-            System.out.print((i + 1) + listOfMission.get(i).getMissionName());
-        }
-        int select = valueSelect(0, 8);
->>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
-
-
-<<<<<<< HEAD
-=======
-    }*/
->>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
-
-//    private void idToEditView() {
-//        System.out.println("Need Edit: you are in id to edit view");
-//        System.out.println("Mission 1, Mission 2, mission  3");
-//        for (int i = 0; i < listOfMission.size(); i++){
-//            System.out.print((i + 1) + listOfMission.get(i).getMissionName());
-//        }
-//        int select = valueSelect(0, 8);
-//
-//        if (select == 0) {
-//            idToEditView();
-//        } else if (0 < select & select < listOfMission.size()) {
-//            missionCreateMenu(select, s);
-//        } else if (select == 9) {
-//            viewAllCre(s);
-//        }
-//
-//    }
-
-
-
-<<<<<<< HEAD
-
-//    private void viewMissionInformation(Mission mission) {
-//        System.out.println("Countries: " +);
-//        System.out.println();
-//        System.out.println("years of work experience: " + createWorExp(s));
-//        System.out.println("occupations: " + createOcc(s));
-//        System.out.println("health records: " + s.getHealthRecord());
-//        System.out.println("criminal records: " + s.getCriminalRecord());
-//        System.out.println("computer skill: " + s.getComputerSkill());
-//        System.out.println("language spoken: " + createLan(s));
-//        int back = 1;
-//        while (back != 0) {
-//            back = inputInt("Press 0 to go back");
-//        }
-//        if (back == 0) {
-////            criteriaMenu(s);
-//        }
-//
-//    }
-=======
-    /*private void viewMissionInformation(Mission m) {
-        System.out.println("Countries: " +);
-        System.out.println();
-        System.out.println("years of work experience: " + createWorExp(s));
-        System.out.println("occupations: " + createOcc(s));
-        System.out.println("health records: " + s.getHealthRecord());
-        System.out.println("criminal records: " + s.getCriminalRecord());
-        System.out.println("computer skill: " + s.getComputerSkill());
-        System.out.println("language spoken: " + createLan(s));
-        int back = 1;
-        while (back != 0) {
-            back = inputInt("Press 0 to go back");
-        }
-        if (back == 0) {
-//            criteriaMenu(s);
-        }
-
-    }*/
->>>>>>> 25bcbc6f17d08f939962b1fdd74432d61a2b70bb
     private String displayCountry(SelectionCriteria s) {
         String exp = "";
         for (int i = 0; i < s.getExperience().size(); i++) {

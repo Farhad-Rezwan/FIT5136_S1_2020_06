@@ -2,6 +2,7 @@ package main.java.missontomars.model;
 
 
 
+import javax.print.attribute.standard.Destination;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Mission {
     String missionOrigin;
     ArrayList<String> countriesAllowed;
     Date launchDate;
-    ArrayList<String> destinationAddress;
+    String destinationAddress;
     int duration;
     String status;
     String missionType;
@@ -24,11 +25,12 @@ public class Mission {
     public Mission() {
       selectionCriteria = new SelectionCriteria();
       missionType = "Planning Phase";
+      countriesAllowed = new ArrayList<>();
     }
 
     public Mission(int id, String missionName, String missionDescription,
                    String missionOrigin, ArrayList<String> countriesAllowed, Date launchDate,
-                   ArrayList<String> destinationAddress, int duration, String status,
+                   String destinationAddress, int duration, String status,
                    String missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
                    SelectionCriteria selectionCriteria) {
         this.id = id;
@@ -91,7 +93,14 @@ public class Mission {
     }
 
     public void setCountriesAllowed(ArrayList<String> countriesAllowed) {
+        if (null != countriesAllowed)
         this.countriesAllowed = countriesAllowed;
+    }
+
+    public void setCountriesAllowed(String countryAllowed) {
+        if (null != countriesAllowed) {
+            this.countriesAllowed.add(countryAllowed);
+        }
     }
 
     public Date getLaunchDate() {
@@ -102,12 +111,35 @@ public class Mission {
         this.launchDate = launchDate;
     }
 
-    public ArrayList<String> getDestinationAddress() {
+    public String getDestinationAddress() {
         return destinationAddress;
     }
 
-    public void setDestinationAddress(ArrayList<String> destinationAddress) {
-        this.destinationAddress = destinationAddress;
+    public void setDestinationAddress(String destinationAddress) {
+        if (null != destinationAddress) {
+            ArrayList<String> missionDestinationList = new ArrayList<>();
+            missionDestinationList.add("INSIGHT");
+            missionDestinationList.add("PHOENIX");
+            missionDestinationList.add("VIKING 1");
+            missionDestinationList.add("PATHFINDER");
+            missionDestinationList.add("OPPORTUNITY");
+            missionDestinationList.add("VIKING 2");
+            missionDestinationList.add("CURIOSITY");
+            missionDestinationList.add("SPIRIT");
+
+
+            for (int i = 0; i < missionDestinationList.size(); i++) {
+                if (destinationAddress.trim().toUpperCase().equals(missionDestinationList.get(i).trim().toUpperCase())) {
+                    this.destinationAddress = missionDestinationList.get(i);
+                    break;
+                } else {
+                    this.destinationAddress = null;
+                }
+            }
+        } else {
+            this.destinationAddress = null;
+        }
+
     }
 
     public int getDuration() {
@@ -185,7 +217,7 @@ public class Mission {
         }
         sb.append("\n \t");
 
-//        sb.append("~" + "Mission destination address: " + launchDate);
+        sb.append("Mission destination address: " + destinationAddress);
 //        sb.append("~" + "Mission job information: " + missionName);
         try {
             sb.append(cargoRequirement.displayCargoRequirement());

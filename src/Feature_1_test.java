@@ -57,7 +57,7 @@ public class Feature_1_test {
 
 
 
-        missionToMars.login();
+//        missionToMars.login();
         missionToMars.missionCreateMenu(m);
 
 
