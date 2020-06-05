@@ -213,7 +213,7 @@ public class MissionToMars {
                 addDuration(select, mission);
                 break;
             case 8:
-                getJobId(mission);
+                addJob(mission);
                 break;
             case 9:
                 addCargoRequirement(select, mission);
@@ -368,33 +368,59 @@ public class MissionToMars {
     }
 
 
-    private void addJob(Mission mission) {
-        System.out.print("Selected Job"
-                + "\nPress 1 for job name"
-                + "\nPress 2 for job description"
-                + "\nPress 3 for employment requirement"
-                + "\nPress 0 to go back");
-        int select = valueSelect(0, 4);
-        if (select == 0) {
-            jobsShowView(mission);
-        } else if (0 < select & select < 3) {
-            jobEditMenu(select, mission);
-        }
-    }
+//    private void addJob2(Mission mission) {
+//        getJobId(mission);
+//
+//        if (null != job) {
+//            System.out.print("Selected Job :" + job.getJobName()
+//                    + "\nPress 1 for job name"
+//                    + "\nPress 2 for job description"
+//                    + "\nPress 3 for employment requirement"
+//                    + "\nPress 0 to go back");
+//            int select = valueSelect(0, 4);
+//            if (select == 0) {
+//                missionEditMenu(select, mission);;
+//            } else if (0 < select & select < 3) {
+////            jobEditMenu(select, job);
+//            }
+//
+//            missionEditMenu(select, mission);
+//
+//        } else {
+//            missionEditMenu(0, mission);
+//        }
+//
+//
+//    }
 
-    private void getJobId(Mission mission) {
+
+    private void addJob(Mission mission) {
         StringBuilder str = new StringBuilder();
+        int i = 0;
         if (null != mission.getJob()) {
             for (int i = 0; i < mission.getJob().size(); i++)
-                str.append( (i + 1) + ": " + mission.getJob().get(i).displayJob());
+                str.append( "Press " + (i + 1) + " to edit: " +  mission.getJob().get(i).getJobName() + "\n");
         } else
             str.append("There is no job set");
+        str.append("Press 0 to go back");
+        System.out.println(str.toString());
+        int editSelect = inputInt("Select your option");
+        while (editSelect < 0 || editSelect > mission.getJob().size()) {
+            editSelect = inputInt("Please select an right option");
+        }
+
+        if (editSelect == 0) {
+            missionEditMenu(editSelect, mission);
+        } else {
+            jobEditMenu(editSelect, mission.getJob().get(editSelect - 1));
+        }
+
 
     }
 
-    private void jobEditMenu(int select, Mission mission) {
+    private void jobEditMenu(int select, Job job) {
 
-        System.out.println(displayHeaderJob(select, mission));
+        System.out.println(displayHeaderJob(select, job));
 
         int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
         while (editSelect < 0 || editSelect > 2) {
@@ -402,22 +428,22 @@ public class MissionToMars {
         }
 
         if (editSelect == 0) {
-            addJob(mission);
+            ;
         }
 
         if (editSelect == 1) {
-            System.out.println(displayHeaderJob(select, mission));
-            addJobEntries(select, mission);
+            System.out.println(displayHeaderJob(select, job));
+            addJobEntries(select, job);
         }
 
         if (editSelect == 2) {
-            deleteJobEntries(select, mission);
+            deleteJobEntries(select, job);
         }
 
-        System.out.println(displayHeaderJob(select, mission));
+        System.out.println(displayHeaderJob(select, job));
     }
 
-    private String displayHeaderJob(int select, Mission mission) {
+    private String displayHeaderJob(int select, Job job) {
 
         StringBuilder str = new StringBuilder();
         System.out.print('\u000C');
@@ -425,28 +451,22 @@ public class MissionToMars {
 
         switch (select) {
             case 1:
-                if (null != mission.getJob())
-                    str.append("Job name is set to: " + mission.getMissionName());
+                if (null != job.getJobName())
+                    str.append("Job name is set to: " + job.getJobName());
                 else
-                    str.append("There is no mission name set");
+                    str.append("There is no job name set");
                 break;
             case 2:
-                if (null != mission.getMissionDescription())
-                    str.append("Mission description: " + mission.getMissionDescription());
+                if (null != job.getJobDescription())
+                    str.append("Mission description: " + job.getJobDescription());
                 else
-                    str.append("There is no mission description set");
+                    str.append("There is no job description set");
                 break;
             case 3:
-                if (null != mission.getMissionOrigin())
-                    str.append("Mission origin: " + mission.getMissionOrigin());
-                else
-                    str.append("There is no mission origin set");
-                break;
-            case 4:
-                if (mission.getCountriesAllowed().size() > 0){
-                    str.append("Countries allowed");
-                    for (int i = 0; i < mission.getCountriesAllowed().size(); i++)
-                        str.append("  " + (i + 1) + ": " + mission.getCountriesAllowed().get(i));
+                if (job.getEmploymentRequirements().size() > 0){
+                    str.append("Employment Requirements");
+                    for (int i = 0; i < job.getEmploymentRequirements().size(); i++)
+                        str.append("  " + (i + 1) + ": " + job.getEmploymentRequirements().get(i).displayJobTitles());
                 } else {
                     str.append("There is no countries allowed yet");
                 }
@@ -456,47 +476,47 @@ public class MissionToMars {
         return str.toString();
     }
 
-    private void addJobEntries(int select, Mission mission) {
+    private void addJobEntries(int select, Job job) {
 
         switch (select) {
             case 1:
-                addJobName(select, mission);
+                addJobName(select, job);
                 break;
             case 2:
-                addJobDescription(select, mission);
+                addJobDescription(select, job);
                 break;
             case 3:
-                addEmploymentRequirement(select, mission);
+                addEmploymentRequirement(select, job);
                 break;
         }
     }
 
-    private void addJobName(int select, Mission mission ) {
+    private void addJobName(int select, Job job ) {
 
     }
-    private void addJobDescription(int select, Mission mission) {
-
-    }
-
-    private void addEmploymentRequirement (int select, Mission mission) {
+    private void addJobDescription(int select, Job job ) {
 
     }
 
-    private void deleteJobEntries(int select, Mission mission) {
-        switch (select) {
-            case 1:
-                deleteMissionName(select, mission);
-                break;
-            case 2:
-                deleteMissionDescription(select, mission);
-                break;
-            case 3:
-                deleteMissionOrigin(select, mission);
-                break;
-            case 4:
-                deleteCountriesAllowed(select, mission);
-                break;
-        }
+    private void addEmploymentRequirement (int select, Job job ) {
+
+    }
+
+    private void deleteJobEntries(int select, Job job ) {
+//        switch (select) {
+//            case 1:
+//                deleteMissionName(select, job );
+//                break;
+//            case 2:
+//                deleteMissionDescription(select, job);
+//                break;
+//            case 3:
+//                deleteMissionOrigin(select, job);
+//                break;
+//            case 4:
+//                deleteCountriesAllowed(select, job);
+//                break;
+//        }
 
     }
 

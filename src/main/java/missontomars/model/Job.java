@@ -59,7 +59,7 @@ public class Job {
         for (int i = 0; i < employmentRequirements.size(); i++) {
             sb.append( "\n \t \t \t" + (i + 1) + ": " + employmentRequirements.get(i).displayJobTitles());
         }
-        sb.append("\n \t");
+        sb.append("\n");
 
 
         return sb.toString();
