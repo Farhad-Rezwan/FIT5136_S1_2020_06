@@ -30,4 +30,12 @@ public class Job {
     public void setEmploymentRequirements(ArrayList<EmploymentRequirement> employmentRequirements) {
         this.employmentRequirements = employmentRequirements;
     }
+
+    public void setEmploymentRequirements(int index, EmploymentRequirement employmentRequirement) {
+        this.employmentRequirements.add(index, employmentRequirement);
+    }
+
+    public void setEmploymentRequirements(EmploymentRequirement employmentRequirement) {
+        this.employmentRequirements.add(employmentRequirement);
+    }
 }

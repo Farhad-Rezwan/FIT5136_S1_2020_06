@@ -70,7 +70,7 @@ public class MissionToMars {
         } else if (0 < select & select < 12) {
             missionEditMenu(select, mission);
         } else if (select == 12) {
-            showOverallInformation(select, mission);
+            showOverallInformation(mission);
         }
     }
 
@@ -152,7 +152,7 @@ public class MissionToMars {
                     str.append("There is no duration set for the mission");
                 break;
             case 8:
-                if (mission.getMissionType().size() > 0) {
+                if (null != mission.getMissionType()) {
                     str.append("Mission type is set to ");
                 } else {
                     str.append("Start from here");
@@ -228,6 +228,24 @@ public class MissionToMars {
     }
 
     private void idToEditView() {
+        int numberOfMission = listOfMission.size();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < numberOfMission; i++) {
+            sb.append((i + 1) + "： " + listOfMission.get(i).getMissionName() + "\n");
+        }
+        System.out.println(sb.toString());
+
+        int missionSelect = inputInt("Select mission number to edit", sb.toString());
+        while (missionSelect < 1 || missionSelect > numberOfMission) {
+            System.out.println(" ");
+            System.out.println(sb.toString());
+            missionSelect = inputInt("Please choose the right option", sb.toString());
+
+        }
+
+        missionCreateMenu(listOfMission.get(missionSelect - 1));
+        System.out.println("Selected");
 
     }
 
@@ -306,7 +324,31 @@ public class MissionToMars {
     }
 
     // 12.
-    private void showOverallInformation(int select, Mission mission) {
+    private void showOverallInformation(Mission mission) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(mission.displayMission());
+        int editSelect;
+        do {
+            System.out.println(sb.toString());
+            editSelect = inputInt("Please choose 0 to go back", sb.toString());
+        } while (editSelect != 0);
+
+        missionCreateMenu(mission);
+
+
+
+
+
+
+
+//        int missionSelect = inputInt("Select mission number to edit", sb.toString());
+//        while (missionSelect < 1 || missionSelect > numberOfMission) {
+//            System.out.println(" ");
+//            System.out.println(sb.toString());
+//            missionSelect = inputInt("Please choose the right option", sb.toString());
+//
+//        }
+
 
     }
 
@@ -394,7 +436,7 @@ public class MissionToMars {
 
     // need change?
     public void deleteJob(int select, Mission mission){
-        mission.setJob(null);
+        mission.getJob().clear();
         missionEditMenu(select, mission);
     }
 
@@ -516,6 +558,29 @@ public class MissionToMars {
         return integer;
     }
 
+    private int inputInt(String displayMessage, String finallyString) {
+        boolean notAnInt = true;
+        int integer = 0;
+        while (notAnInt) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println(displayMessage);
+            //judge whether the input is an int number
+            try {
+                integer = sc.nextInt();
+                System.out.println(" ");
+                notAnInt = false;
+            }
+            //not an int number
+            catch (Exception e) {
+                System.out.println("ERROR: Please enter proper respective number");
+                System.out.println(" ");
+                System.out.println(finallyString);
+            }
+
+        }
+        return integer;
+    }
+
     public String inputString(String displayMessage) {
         System.out.println(displayMessage);
         Scanner scan = new Scanner(System.in);
@@ -549,11 +614,11 @@ public class MissionToMars {
     public Date insertDate(String displayMessage) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter the Date ");
+        System.out.println(displayMessage);
 
         String date = scanner.next();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date2return =null;
         try {
             //Parsing the String
