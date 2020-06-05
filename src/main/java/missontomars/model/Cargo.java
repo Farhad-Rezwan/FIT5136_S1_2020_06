@@ -1,12 +1,12 @@
 package main.java.missontomars.model;
 
 public class Cargo {
-    private int cargo_Id;
+    private int cargoId;
     private String cargo;
     private int quantityAvailable;
 
     public Cargo(int cargo_Id, String cargo, int quantityAvailable) {
-        this.cargo_Id = cargo_Id;
+        this.cargoId = cargo_Id;
         this.cargo = cargo;
         this.quantityAvailable = quantityAvailable;
     }
@@ -15,11 +15,11 @@ public class Cargo {
     }
 
     public int getCargo_Id() {
-        return cargo_Id;
+        return cargoId;
     }
 
-    public void setCargo_Id(int cargo_Id) {
-        this.cargo_Id = cargo_Id;
+    public void setCargo_Id(int cargoId) {
+        this.cargoId = cargoId;
     }
 
     public String getCargo() {
@@ -36,5 +36,12 @@ public class Cargo {
 
     public void setQuantityAvailable(int quantityAvailable) {
         this.quantityAvailable = quantityAvailable;
+    }
+
+    public String displayCargo () {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cargo id: " + cargoId + ", cargo : " + cargo + ", cargo quantity available: " + quantityAvailable);
+
+        return sb.toString();
     }
 }

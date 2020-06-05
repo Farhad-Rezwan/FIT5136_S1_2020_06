@@ -16,20 +16,20 @@ public class Mission {
     ArrayList<String> destinationAddress;
     int duration;
     String status;
-    ArrayList<String> missionType;
+    String missionType;
     ArrayList<Job> job;
     CargoRequirement cargoRequirement;
     private SelectionCriteria selectionCriteria;
 
     public Mission() {
       selectionCriteria = new SelectionCriteria();
-
+      missionType = "Planning Phase";
     }
 
     public Mission(int id, String missionName, String missionDescription,
                    String missionOrigin, ArrayList<String> countriesAllowed, Date launchDate,
                    ArrayList<String> destinationAddress, int duration, String status,
-                   ArrayList<String> missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
+                   String missionType, ArrayList<Job> job, CargoRequirement cargoRequirement,
                    SelectionCriteria selectionCriteria) {
         this.id = id;
         this.missionName = missionName;
@@ -126,20 +126,24 @@ public class Mission {
         this.status = status;
     }
 
-    public List<String> getMissionType() {
+    public String getMissionType() {
         return missionType;
-    }
-
-    public void setMissionType(ArrayList<String> missionType) {
-        this.missionType = missionType;
     }
 
     public ArrayList<Job> getJob() {
         return job;
     }
 
-    public void setJob(ArrayList<Job> job) {
-        this.job = job;
+    public void setJob(ArrayList<Job> jobs) {
+        this.job = jobs;
+    }
+
+    public void setJob(int index, Job job) {
+        this.job.add(index, job);
+    }
+
+    public void setJob(Job job) {
+        this.job.add(job);
     }
 
     public CargoRequirement getCargoRequirement() {
@@ -149,4 +153,47 @@ public class Mission {
     public void setCargoRequirement(CargoRequirement cargoRequirement) {
         this.cargoRequirement = cargoRequirement;
     }
+
+
+    public String displayMission() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" \n");
+
+        sb.append("Mission name: " + missionName + "\n \t");
+        sb.append("Mission description: " + missionDescription + "\n \t");
+        sb.append("Mission origion: " + missionOrigin + "\n \t");
+        try {
+            sb.append("Countries allowed: ");
+            for (int i = 0; i < countriesAllowed.size(); i++) {
+                sb.append(countriesAllowed.get(i));
+                if (i == countriesAllowed.size() -1) {
+                    sb.append(". ");
+                } else {
+                    sb.append(", ");
+                }
+            }
+
+        } catch (Exception e) {
+            sb.append("null");
+        }
+        sb.append("\n \t");
+
+        try {
+            sb.append("Mission launch date: " + launchDate.toString());
+        } catch (Exception e) {
+            sb.append("Mission Launch Date: not assigned");
+        }
+        sb.append("\n \t");
+
+//        sb.append("~" + "Mission destination address: " + launchDate);
+//        sb.append("~" + "Mission job information: " + missionName);
+        try {
+            sb.append(cargoRequirement.displayCargoRequirement());
+        } catch(Exception e) {}
+        sb.append("Mission status: " + status + "\n");
+
+
+        return sb.toString();
+    }
+
 }
