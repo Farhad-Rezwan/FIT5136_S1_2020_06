@@ -9,6 +9,9 @@ public class EmploymentRequirement {
         this.jobTitle = jobTitle;
     }
 
+    public EmploymentRequirement() {
+    }
+
     public int getNumberEmployeeRequired() {
         return numberEmployeeRequired;
     }

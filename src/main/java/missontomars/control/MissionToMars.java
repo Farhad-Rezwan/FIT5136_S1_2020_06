@@ -69,7 +69,8 @@ public class MissionToMars {
                 + "\nPress 11 for mission overall information"
                 + "\nPress 0 to back"
                 + "\n");
-        int select = valueSelect(0, 11);
+        int select = inputInt("Please select an option");
+        select = valueSelect(0,11,select);
         if (select == 0) {
             idToEditView();
         } else if (0 < select & select < 11) {
@@ -80,7 +81,7 @@ public class MissionToMars {
     }
 
 
-    private void missionEditMenu(int select, Mission mission) {
+    public void missionEditMenu(int select, Mission mission) {
 
         System.out.println(displayHeader(select, mission));
 
@@ -94,8 +95,12 @@ public class MissionToMars {
         }
 
         if (editSelect == 1) {
-            System.out.println(displayHeader(select, mission));
-            addEntries(select, mission);
+            if (select == 8){
+                addJob(select, mission);
+            }
+
+            //System.out.println(displayHeader(select, mission));
+            //addEntries(select, mission);
         }
 
         if (editSelect == 2) {
@@ -105,12 +110,58 @@ public class MissionToMars {
         System.out.println(displayHeader(select, mission));
     }
 
+    private void addJob(int select, Mission mission){
+        String jobName = inputString("Enter job name");
+        String jobDes = inputString("Enter job description");
+        Job newJob = new Job();
+        newJob.setJobName(jobName);
+        newJob.setJobDescription(jobDes);
+        int titleSelect = inputInt("Press 1 to add job title"
+                + "\nPress 0 to go back");
+        titleSelect = valueSelect(0,1,titleSelect);
+        if (titleSelect == 1){
+           addJobTitle(select,mission, newJob);
+        }
+        else if(titleSelect == 0){
+            ArrayList<Job> newJobs = mission.getJob();
+            newJobs.add(newJob);
+            mission.setJob(newJobs);
+            missionEditMenu(select,mission);
+        }
+
+    }
+
+    public void addJobTitle(int select, Mission mission, Job job) {
+        boolean addMenu = true;
+        while (addMenu) {
+            System.out.println("Job:" + job.getJobName());
+            job.displayTitle();
+            int option = inputInt("Press 1 to add a new title"
+                    + "\nPress 2 to delete title" + "\nPress 0 to go back");
+            option = valueSelect(0, 2, option);
+            if (option == 1) {
+                job.addTitle();
+            } else if (option == 0) {
+                addMenu = false;
+            } else if (option == 2) {
+                job.deleteTitle();
+            }
+        }
+        mission.getJob().add(job);
+        missionEditMenu(select, mission);
+    }
+
+    private int valueSelect(int min, int max, int select) {
+        while (!(min <= select & select <= max)) {
+            select = inputInt("Please select the right option");
+        }
+        return select;
+    }
+
     private String displayHeader(int select, Mission mission) {
 
         StringBuilder str = new StringBuilder();
         System.out.print('\u000C');
-
-
         switch (select) {
             case 1:
                 if (null != mission.getMissionName())
@@ -163,11 +214,11 @@ public class MissionToMars {
                     str.append("There is no duration set for the mission");
                 break;
             case 8:
-                if (null != mission.getJob()) {
-                    for (int i = 0; i < mission.getJob().size(); i++)
-                        str.append( (i + 1) + ": " + mission.getJob().get(i).displayJob());
-                } else
-                    str.append("There is no job set");
+                if (mission.getJob().size() > 0){
+                    for (int i = 0; i < mission.getJob().size(); i++){
+                        System.out.println( (i + 1) + ": " + mission.getJob().get(i).getJobName());
+                    }
+                }
                 break;
             case 9:
                 if (null != mission.getCargoRequirement()) {
@@ -395,32 +446,30 @@ public class MissionToMars {
 
 
     private void addJob(Mission mission) {
-        StringBuilder str = new StringBuilder();
-        int i = 0;
+        /*StringBuilder str = new StringBuilder();
         if (null != mission.getJob()) {
             for (int i = 0; i < mission.getJob().size(); i++)
                 str.append( "Press " + (i + 1) + " to edit: " +  mission.getJob().get(i).getJobName() + "\n");
         } else
             str.append("There is no job set");
         str.append("Press 0 to go back");
-        System.out.println(str.toString());
+        System.out.println(str.toString());*/
         int editSelect = inputInt("Select your option");
-        while (editSelect < 0 || editSelect > mission.getJob().size()) {
+        while (editSelect < 0 || editSelect > 2) {
             editSelect = inputInt("Please select an right option");
         }
-
         if (editSelect == 0) {
             missionEditMenu(editSelect, mission);
         } else {
-            jobEditMenu(editSelect, mission.getJob().get(editSelect - 1));
+            jobEditMenu(editSelect, mission.getJob().get(editSelect - 1), mission);
         }
 
 
     }
 
-    private void jobEditMenu(int select, Job job) {
+    private void jobEditMenu(int select, Job job, Mission mission) {
 
-        System.out.println(displayHeaderJob(select, job));
+        System.out.println(display(select, mission, job));
 
         int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
         while (editSelect < 0 || editSelect > 2) {
@@ -432,7 +481,7 @@ public class MissionToMars {
         }
 
         if (editSelect == 1) {
-            System.out.println(displayHeaderJob(select, job));
+            //System.out.println(displayHeaderJob(select, job));
             addJobEntries(select, job);
         }
 
@@ -440,15 +489,13 @@ public class MissionToMars {
             deleteJobEntries(select, job);
         }
 
-        System.out.println(displayHeaderJob(select, job));
+        //System.out.println(displayHeaderJob(select, job));
     }
 
-    private String displayHeaderJob(int select, Job job) {
+    private String display(int select, Mission mission, Job job) {
 
         StringBuilder str = new StringBuilder();
         System.out.print('\u000C');
-
-
         switch (select) {
             case 1:
                 if (null != job.getJobName())
@@ -471,6 +518,12 @@ public class MissionToMars {
                     str.append("There is no countries allowed yet");
                 }
                 break;
+            case 8:
+                if (mission.getJob().size() > 0){
+                    for (int i = 0; i < mission.getJob().size(); i++){
+                        System.out.println( (i + 1) + ": " + mission.getJob().get(i).getJobName());
+                    }
+                }
 
         }
         return str.toString();
@@ -617,14 +670,14 @@ public class MissionToMars {
         else
             System.out.println("Nothing to delete");
 
-        int choise = valueSelect(0, mission.getCountriesAllowed().size() + 1);
+        /*int choise = valueSelect(0, mission.getCountriesAllowed().size() + 1);
         if (choise == 0) {
             missionEditMenu(select, mission);
         } else if (0 < choise & choise < mission.getCountriesAllowed().size() + 1) {
             mission.getCountriesAllowed().remove(choise - 1 );
         } else if (choise == mission.getCountriesAllowed().size() + 1) {
             mission.getCountriesAllowed().clear();
-        }
+        }*/
 
     }
 
@@ -646,7 +699,10 @@ public class MissionToMars {
 
     // need change?
     public void deleteJob(int select, Mission mission){
-        mission.getJob().clear();
+        displayHeader(select,mission);
+        int deleteOption = inputInt("Please select the number you want to delete");
+        deleteOption = valueSelect(1,mission.getJob().size(),deleteOption);
+        mission.getJob().remove((deleteOption - 1));
         missionEditMenu(select, mission);
     }
 
@@ -755,7 +811,7 @@ public class MissionToMars {
     private int valueSelect(int min, int max) {
         int select = -1;
         while (!(min <= select & select <= max)) {
-            select = inputInt("Please select an option");
+            select = inputInt("Please select the right option");
         }
         return select;
     }

@@ -221,7 +221,7 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 int selection = inputInt("Please select the number");
-                selection = valueSelect(1,(s.getQualification().size() + 1),selection);
+                selection = valueSelect(1,s.getQualification().size(),selection);
                 s.getQualification().remove((selection - 1));
                 criteriaEditMenu(select, s);
             }
@@ -237,7 +237,7 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 int selection = inputInt("Please select the number");
-                selection = valueSelect(1,(s.getExperience().size() + 1),selection);
+                selection = valueSelect(1,s.getExperience().size(),selection);
                 s.getExperience().remove((selection - 1));
                 criteriaEditMenu(select, s);
             }
@@ -253,7 +253,7 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 int selection = inputInt("Please select the number");
-                selection = valueSelect(1,(s.getOccupation().size() + 1),selection);
+                selection = valueSelect(1,s.getOccupation().size(),selection);
                 s.getOccupation().remove((selection - 1));
                 criteriaEditMenu(select, s);
             }
@@ -305,7 +305,7 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 int selection = inputInt("Please select the number");
-                selection = valueSelect(1,(s.getLanguageSpoken().size() + 1),selection);
+                selection = valueSelect(1,s.getLanguageSpoken().size(),selection);
                 s.getExperience().remove((selection - 1));
                 criteriaEditMenu(select, s);
             }
