@@ -84,7 +84,7 @@ public class MissionToMars {
 
         System.out.println(displayHeader(select, mission));
 
-        int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
+        int editSelect = inputInt("Press 1 to add/edit" + "\nPress 2 to delete" + "\nPress 0 to go back");
         while (editSelect < 0 || editSelect > 2) {
             editSelect = inputInt("Please select an right option");
         }
@@ -213,7 +213,7 @@ public class MissionToMars {
                 addDuration(select, mission);
                 break;
             case 8:
-                addJob(mission);
+                editJobsMenu(mission);
                 break;
             case 9:
                 addCargoRequirement(select, mission);
@@ -250,7 +250,7 @@ public class MissionToMars {
         }
 
         missionCreateMenu(listOfMission.get(missionSelect - 1));
-        System.out.println("Selected");
+//        System.out.println("Selected");
 
     }
 
@@ -362,7 +362,7 @@ public class MissionToMars {
 
         }
 
-        addJob(listOfMission.get(jobSelect - 1));
+        editJobsMenu(listOfMission.get(jobSelect - 1));
         System.out.println("Selected");
 
     }
@@ -394,53 +394,58 @@ public class MissionToMars {
 //    }
 
 
-    private void addJob(Mission mission) {
+    private void editJobsMenu(Mission mission) {
         StringBuilder str = new StringBuilder();
-        int i = 0;
         if (null != mission.getJob()) {
             for (int i = 0; i < mission.getJob().size(); i++)
                 str.append( "Press " + (i + 1) + " to edit: " +  mission.getJob().get(i).getJobName() + "\n");
         } else
             str.append("There is no job set");
+        str.append("Press " + (mission.getJob().size() + 1) + " to add a job \n");
         str.append("Press 0 to go back");
         System.out.println(str.toString());
         int editSelect = inputInt("Select your option");
-        while (editSelect < 0 || editSelect > mission.getJob().size()) {
+        while (editSelect < 0 || editSelect > mission.getJob().size() + 1) {
             editSelect = inputInt("Please select an right option");
         }
 
         if (editSelect == 0) {
+            System.out.println(displayHeader(8, mission));
             missionEditMenu(editSelect, mission);
+        } else if (editSelect == mission.getJob().size() + 1){
+            // createNewJob
+            System.out.println(editSelect);
         } else {
-            jobEditMenu(editSelect, mission.getJob().get(editSelect - 1));
+            jobEditMenu(mission.getJob().get(editSelect - 1), mission);
         }
 
 
     }
 
-    private void jobEditMenu(int select, Job job) {
+    private void jobEditMenu(Job job, Mission mission) {
 
-        System.out.println(displayHeaderJob(select, job));
+        System.out.println(job.displayJob());
 
-        int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
-        while (editSelect < 0 || editSelect > 2) {
+        int editSelect = inputInt("Press 1 to edit job name"
+                + "\nPress 2 edit job description"
+                + "\nPress 3 edit job employment requirement"
+                + "\nPress 0 to go back");
+        while (editSelect < 0 || editSelect > 3) {
             editSelect = inputInt("Please select an right option");
         }
 
         if (editSelect == 0) {
-            ;
+//            System.out.println(displayHeaderJob(editSelect, job));
+            System.out.println(displayHeader(8, mission));
+            editJobsMenu(mission);
+        } else {
+            System.out.println(displayHeaderJob(editSelect, job));
+            editJobEntries(editSelect, job, mission);
         }
 
-        if (editSelect == 1) {
-            System.out.println(displayHeaderJob(select, job));
-            addJobEntries(select, job);
-        }
 
-        if (editSelect == 2) {
-            deleteJobEntries(select, job);
-        }
 
-        System.out.println(displayHeaderJob(select, job));
+//        System.out.println(displayHeaderJob(select, job));
     }
 
     private String displayHeaderJob(int select, Job job) {
@@ -466,9 +471,9 @@ public class MissionToMars {
                 if (job.getEmploymentRequirements().size() > 0){
                     str.append("Employment Requirements");
                     for (int i = 0; i < job.getEmploymentRequirements().size(); i++)
-                        str.append("  " + (i + 1) + ": " + job.getEmploymentRequirements().get(i).displayJobTitles());
+                        str.append("\n \t " + (i + 1) + ": " + job.getEmploymentRequirements().get(i).displayJobTitles());
                 } else {
-                    str.append("There is no countries allowed yet");
+                    str.append("There is no employment requirement set yet");
                 }
                 break;
 
@@ -476,33 +481,134 @@ public class MissionToMars {
         return str.toString();
     }
 
-    private void addJobEntries(int select, Job job) {
+    private void editJobEntries(int select, Job job, Mission mission) {
 
         switch (select) {
             case 1:
-                addJobName(select, job);
+                addJobName(job, mission);
                 break;
             case 2:
-                addJobDescription(select, job);
+                addJobDescription(job, mission);
                 break;
             case 3:
-                addEmploymentRequirement(select, job);
+                addEmploymentRequirement(job, mission);
                 break;
         }
     }
 
-    private void addJobName(int select, Job job ) {
+    private void addJobName(Job job, Mission mission ) {
+        System.out.print('\u000C');
+        String missionName  = inputString("Please insert job name: ");
+        job.setJobName(missionName);
+        jobEditMenu(job, mission);
 
     }
-    private void addJobDescription(int select, Job job ) {
+    private void addJobDescription(Job job, Mission mission) {
+        System.out.print('\u000C');
+        String missionDescription = inputString("Please insert job description: ");
+        job.setJobDescription(missionDescription);
+        jobEditMenu(job, mission);
+    }
+
+    private void addEmploymentRequirement (Job job, Mission mission) {
+        StringBuilder str = new StringBuilder();
+        if (null != job.getEmploymentRequirements()) {
+            for (int i = 0; i < job.getEmploymentRequirements().size(); i++)
+                str.append( "Press " + (i + 1) + " to edit: " +  job.getEmploymentRequirements().get(i).getJobTitle() + "\n");
+        } else
+            str.append("There is no employment requirement set");
+        str.append("Press " + (job.getEmploymentRequirements().size() + 1) + " new employment requirement \n");
+        str.append("Press 0 to go back");
+        System.out.println(str.toString());
+        int editSelect = inputInt("Select your option");
+        while (editSelect < 0 || editSelect > job.getEmploymentRequirements().size() + 1) {
+            editSelect = inputInt("Please select a right option");
+        }
+
+        if (editSelect == 0) {
+            jobEditMenu(job, mission);
+        } else if (editSelect == job.getEmploymentRequirements().size() + 1){
+            // createNewJob
+            System.out.println(editSelect);
+        } else {
+//            jobEditMenu(mission.getJob().get(editSelect - 1), mission);
+            employmentRequirementEditMenu(job.getEmploymentRequirements().get(editSelect - 1), job, mission);
+        }
+    }
+
+    private void employmentRequirementEditMenu(EmploymentRequirement empReq, Job job, Mission mission) {
+        System.out.println(empReq.displayJobTitles());
+
+        int editSelect = inputInt("Press 1 to edit job title"
+                + "\nPress 2 edit number of employee required"
+                + "\nPress 0 to go back");
+        while (editSelect < 0 || editSelect > 2) {
+            editSelect = inputInt("Please select an right option");
+        }
+
+        if (editSelect == 0) {
+            System.out.println(displayHeaderJob(3, job));
+            addEmploymentRequirement(job, mission);
+        } else {
+            System.out.println(displayHeaderJobTitle(editSelect, empReq));
+            editEmploymentrequirementEntries(editSelect, job, empReq, mission);
+        }
 
     }
 
-    private void addEmploymentRequirement (int select, Job job ) {
+    private void editEmploymentrequirementEntries(int select, Job job, EmploymentRequirement empRec, Mission mission) {
 
+        switch (select) {
+            case 1:
+                addTitleName(job, empRec, mission);
+                break;
+            case 2:
+                addTitleNumberEmployeeRequired(job, empRec, mission);
+                break;
+        }
     }
 
-    private void deleteJobEntries(int select, Job job ) {
+    private void addTitleName(Job job, EmploymentRequirement employmentRequirement, Mission mission) {
+        System.out.print('\u000C');
+        String titleName  = inputString("Please insert job title name: ");
+        employmentRequirement.setJobTitle(titleName);
+        employmentRequirementEditMenu(employmentRequirement, job, mission);
+
+    }
+    private void addTitleNumberEmployeeRequired(Job job, EmploymentRequirement employmentRequirement, Mission mission) {
+        System.out.print('\u000C');
+        int numberEmployeeRequired = inputInt("Please insert number of employee required for this job title");
+        employmentRequirement.setNumberEmployeeRequired(numberEmployeeRequired);
+        employmentRequirementEditMenu(employmentRequirement, job, mission);
+    }
+
+    private String displayHeaderJobTitle(int select, EmploymentRequirement empReq) {
+
+        StringBuilder str = new StringBuilder();
+        System.out.print('\u000C');
+
+
+        switch (select) {
+            case 1:
+                if (null != empReq.getJobTitle())
+                    str.append("Job title is set to: " + empReq.getJobTitle());
+                else
+                    str.append("There is no job title set");
+                break;
+            case 2:
+                if (0 != empReq.getNumberEmployeeRequired())
+                    str.append("employee required is set to: " + empReq.getNumberEmployeeRequired());
+                else
+                    str.append("There is number of employee required for job title is set");
+                break;
+
+        }
+        return str.toString();
+    }
+
+
+
+    private void deleteJobEntries(int select, Job job, Mission mission ) {
 //        switch (select) {
 //            case 1:
 //                deleteMissionName(select, job );
