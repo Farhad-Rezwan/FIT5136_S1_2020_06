@@ -287,6 +287,10 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
+    private void getAllMission(){
+
+    }
+
     private void idToEditView() {
         int numberOfMission = listOfMission.size();
         StringBuilder sb = new StringBuilder();
