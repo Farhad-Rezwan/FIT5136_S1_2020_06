@@ -84,7 +84,6 @@ public class MissionToMars {
     public void missionEditMenu(int select, Mission mission) {
 
         System.out.println(displayHeader(select, mission));
-
         int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
         while (editSelect < 0 || editSelect > 2) {
             editSelect = inputInt("Please select an right option");
@@ -144,7 +143,12 @@ public class MissionToMars {
             } else if (option == 0) {
                 addMenu = false;
             } else if (option == 2) {
-                job.deleteTitle();
+                if(job.getEmploymentRequirements().size() > 0) {
+                    job.deleteTitle();
+                }
+                else if (job.getEmploymentRequirements().size() == 0){
+                    System.out.println("No title to delete");
+                }
             }
         }
         mission.getJob().add(job);
