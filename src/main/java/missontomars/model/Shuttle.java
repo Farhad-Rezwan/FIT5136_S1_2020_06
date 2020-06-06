@@ -3,14 +3,14 @@ package main.java.missontomars.model;
 public class Shuttle {
     private int id;
     private String shuttleName;
-    private int manufacturingYear;
+    private String manufacturingYear;
     private int fuelCapacity;
     private int passengerCapacity;
     private int cargoCapacity;
     private int travelSpeed;
     private String origin;
 
-    public Shuttle(int id, String shuttleName, int manufacturingYear, int fuelCapacity, int passengerCapacity,
+    public Shuttle(int id, String shuttleName, String manufacturingYear, int fuelCapacity, int passengerCapacity,
                    int cargoCapacity, int travelSpeed, String origin) {
         this.id = id;
         this.shuttleName = shuttleName;
@@ -38,11 +38,11 @@ public class Shuttle {
         this.shuttleName = shuttleName;
     }
 
-    public int getManufacturingYear() {
+    public String getManufacturingYear() {
         return manufacturingYear;
     }
 
-    public void setManufacturingYear(int manufacturingYear) {
+    public void setManufacturingYear(String manufacturingYear) {
         this.manufacturingYear = manufacturingYear;
     }
 

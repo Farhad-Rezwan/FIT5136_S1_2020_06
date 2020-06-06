@@ -25,6 +25,7 @@ public class GetShuttle {
                 System.out.println(line1);
                 shuttle.add(item);
             }
+            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,6 +36,7 @@ public class GetShuttle {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please input the shuttle id for mission");
         String shuttleId = sc.nextLine();
+        sc.close();
         String[] shuttle1 = new String[8];
         for (String[] strings : shuttleSelected) {
             if (shuttleId.equals(strings[0])) {
@@ -43,28 +45,11 @@ public class GetShuttle {
                 }
             }
         }
-        Shuttle shuttle = new Shuttle(Integer.parseInt(shuttle1[0]),shuttle1[1],Integer.parseInt(shuttle1[2]),
+        Shuttle shuttle = new Shuttle(Integer.parseInt(shuttle1[0]),shuttle1[1],shuttle1[2],
                 Integer.parseInt(shuttle1[3]), Integer.parseInt(shuttle1[4]),
                 Integer.parseInt(shuttle1[5]),Integer.parseInt(shuttle1[6]),shuttle1[7]);
+        System.out.println(shuttle.getId() + " " + shuttle.getShuttleName() + " is selected");
         return shuttle;
     }
 
-    public void readEmployee(){
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("shuttle.csv"));//换成你的文件名
-            reader.readLine();//第一行信息，为标题信息，不用,如果需要，注释掉
-            String line;
-            while((line=reader.readLine())!=null){
-                String[] item = line.split(",");
-                StringBuilder line1 = new StringBuilder();
-                for (String column : item) {
-                    line1.append(column).append("      ");
-                }
-                //String last = item[item.length-1];
-                System.out.println(line1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
