@@ -659,8 +659,16 @@ public class MissionToMars {
 
         CargoRequirement cargoRequirement = new CargoRequirement();
         mission.setCargoRequirement(cargoRequirement);
-        String cargoFor = inputString("Please add cargo required for (mission/other mission/journey)");
-        mission.getCargoRequirement().setCargoFor(cargoFor);
+
+        int newSelect = 3;
+        do  {
+            String cargoFor = inputString("Please add cargo required for (mission/other mission/journey)");
+            mission.getCargoRequirement().setCargoFor(cargoFor);
+            System.out.println("Press 1 to add more cargo for \n Press 0 for done");
+            newSelect = valueSelect(0,1);
+        } while(newSelect == 1);
+
+
         int cargoQuantityRequired = inputInt("Please insert cargo quantity required");
         mission.getCargoRequirement().setCargoQuantity(cargoQuantityRequired);
         String itemRequired = inputString("Please insert cargo item required separated by comma");
@@ -669,10 +677,11 @@ public class MissionToMars {
             mission.getCargoRequirement().setCargoRequired(item);
         }
 
-        Cargo cargo = new Cargo();
+
 
         int editSelect = 3;
         do  {
+            Cargo cargo = new Cargo();
             cargo.setCargo(inputString("Please insert cargo container name"));
             cargo.setQuantityAvailable(inputInt("Please insert quantity available in the container"));
             mission.getCargoRequirement().setCargoList(cargo);
@@ -689,7 +698,42 @@ public class MissionToMars {
     }
     // 10.
     private void addStatus(int select, Mission mission) {
-
+        System.out.print("Select status of mission: "
+                + "\nPress 1 for Planning Phase"
+                + "\nPress 2 Departed Earth"
+                + "\nPress 3 Landed on Mars"
+                + "\nPress 4 Mission in progress"
+                + "\nPress 5 Returned to Earth"
+                + "\nPress 6 Mission Completed"
+                + "\nPress 0 to back"
+                + "\n");
+        int choise = valueSelect(0, 6);
+        if (choise == 0) {
+            mission.setStatus("Planning Phase");
+            missionEditMenu(select, mission);
+        } else if (0 < choise & choise < 7) {
+            switch (choise) {
+                case 1:
+                    mission.setStatus("Planning Phase");
+                    break;
+                case 2:
+                    mission.setStatus("Departed Earth");
+                    break;
+                case 3:
+                    mission.setStatus("Landed on Mars");
+                    break;
+                case 4:
+                    mission.setStatus("Mission in progress");
+                    break;
+                case 5:
+                    mission.setStatus("Returned to Earth");
+                    break;
+                case 6:
+                    mission.setStatus("VMission Completed");
+                    break;
+            }
+        }
+        missionEditMenu(select, mission);
     }
 
     // 11.
@@ -836,6 +880,7 @@ public class MissionToMars {
 
     // need change
     public void deleteStatus(int select, Mission mission){
+        mission.setStatus(null);
         missionEditMenu(select, mission);
     }
 
