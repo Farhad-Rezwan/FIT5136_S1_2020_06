@@ -2,6 +2,8 @@ package main.java.missontomars.model;
 
 
 
+import sun.jvm.hotspot.opto.Phase;
+
 import javax.print.attribute.standard.Destination;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,7 +158,27 @@ public class Mission {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (null != status) {
+            ArrayList<String> statusList = new ArrayList<>();
+            statusList.add("Planning Phase");
+            statusList.add("Departed Earth");
+            statusList.add("Landed on Mars");
+            statusList.add("Mission in progress");
+            statusList.add("Returned to Earth");
+            statusList.add("Mission Completed");
+
+
+            for (int i = 0; i < statusList.size(); i++) {
+                if (status.trim().toUpperCase().equals(statusList.get(i).trim().toUpperCase())) {
+                    this.status = statusList.get(i);
+                    break;
+                } else {
+                    this.status = "Planning Phase";
+                }
+            }
+        } else {
+            this.status = "Planning Phase";
+        }
     }
 
     public String getMissionType() {

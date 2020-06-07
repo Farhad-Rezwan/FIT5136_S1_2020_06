@@ -1,30 +1,21 @@
 package main.java.missontomars.control;
 
+import main.java.missontomars.model.Mission;
 import main.java.missontomars.model.SelectionCriteria;
+import main.java.missontomars.model.Shuttle;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EmployFast {
+    private SelectionCriteria s;
+
     public EmployFast() {
+
     }
 
-    public void createSelectionCriteriaView() {
-        int select = inputInt("Shuttle selected"
-                + "\nPress 1 to acquire the employment requirements"
-                + "\nPress 2 to create selection criteria"
-                + "\nPress 3 to view selected shuttle"
-                + "\nPress 0 to back to change a shuttle");
-        select = valueSelect(0,3,select);
-        if (select == 2) {
-            SelectionCriteria selectionCriteria = new SelectionCriteria();
-            criteriaMenu(selectionCriteria);
-        }
-    }
-
-    private void criteriaMenu(SelectionCriteria s) {
-        int select = inputInt("Shuttle selected"
-                + "\nPress 1 for range of age"
+    public void criteriaMenu(Mission mission) {
+        int select = inputInt("\nPress 1 for range of age"
                 + "\nPress 2 for qualification"
                 + "\nPress 3 for years of work experience"
                 + "\nPress 4 for occupations"
@@ -36,95 +27,101 @@ public class EmployFast {
                 + "\nPress 0 to back");
         select = valueSelect(0, 9, select);
         if (select == 0) {
-            createSelectionCriteriaView();
+
         } else if (0 < select & select < 9) {
-            criteriaEditMenu(select, s);
+            criteriaEditMenu(select, mission);
         } else if (select == 9) {
-            viewAllCre(s);
+            viewAllCre(mission);
         }
     }
 
-    private void viewAllCre(SelectionCriteria s) {
-        System.out.println("range of age: " + s.getMinimumAge() + "-" + s.getMaximumAge());
-        System.out.println("qualification: " + createQuaStr(s));
-        System.out.println("years of work experience: " + createWorExp(s));
-        System.out.println("occupations: " + createOcc(s));
-        System.out.println("health records: " + s.getHealthRecord());
-        System.out.println("criminal records: " + s.getCriminalRecord());
-        System.out.println("computer skill: " + s.getComputerSkill());
-        System.out.println("language spoken: " + createLan(s));
+    private void viewAllCre(Mission mission) {
+        System.out.println("range of age: " + mission.getSelectionCriteria().getMinimumAge() + "-" + mission.getSelectionCriteria().getMaximumAge());
+        System.out.println("qualification: " + createQuaStr(mission.getSelectionCriteria()));
+        System.out.println("years of work experience: " + createWorExp(mission.getSelectionCriteria()));
+        System.out.println("occupations: " + createOcc(mission.getSelectionCriteria()));
+        System.out.println("health records: " + mission.getSelectionCriteria().getHealthRecord());
+        System.out.println("criminal records: " + mission.getSelectionCriteria().getCriminalRecord());
+        System.out.println("computer skill: " + mission.getSelectionCriteria().getComputerSkill());
+        System.out.println("language spoken: " + createLan(mission.getSelectionCriteria()));
         int back = 1;
         while (back != 0) {
             back = inputInt("Press 0 to go back");
         }
         if (back == 0) {
-            criteriaMenu(s);
+            criteriaMenu(mission);
         }
 
     }
 
-    private void criteriaEditMenu(int select, SelectionCriteria s) {
-        if (select == 1) {
-            System.out.println(s.getMinimumAge() + "-" + s.getMaximumAge());
-        } else if (select == 2) {
-            for (int i = 0; i < s.getQualification().size(); i++) {
-                System.out.println((i + 1) + "： " + s.getQualification().get(i));
-            }
-        } else if (select == 3) {
-            for (int i = 0; i < s.getExperience().size(); i++) {
-                System.out.println((i + 1) + ": " + s.getExperience().get(i) + " years");
-            }
-        } else if (select == 4) {
-            for (int i = 0; i < s.getOccupation().size(); i++) {
-                System.out.println((i + 1) + ": " + s.getOccupation().get(i));
-            }
-        } else if (select == 5) {
-            System.out.println(s.getHealthRecord());
-        } else if (select == 6) {
-            System.out.println(s.getCriminalRecord());
-        } else if (select == 7) {
-            System.out.println(s.getComputerSkill());
-        } else if (select == 8) {
-            for (int i = 0; i < s.getLanguageSpoken().size(); i++) {
-                System.out.println((i + 1) + ": " + s.getLanguageSpoken().get(i));
-            }
-        }
-        int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
-        editSelect = valueSelect(0,2,editSelect);
-        boolean isEmpty = checkEmpty(select,s);
-        while (isEmpty & editSelect == 2){
-            editSelect = inputInt("This criteria is empty. You can not delete it. Please select again");
-        }
-        if (editSelect == 1) {
+    private void criteriaEditMenu(int select, Mission mission) {
+        SelectionCriteria s = mission.getSelectionCriteria();
+        boolean check = true;
+        while (check) {
             if (select == 1) {
-                addAgeRange(s, select);
+                System.out.println(s.getMinimumAge() + "-" + s.getMaximumAge());
+            } else if (select == 2) {
+                for (int i = 0; i < s.getQualification().size(); i++) {
+                    System.out.println((i + 1) + "： " + s.getQualification().get(i));
+                }
+            } else if (select == 3) {
+                for (int i = 0; i < s.getExperience().size(); i++) {
+                    System.out.println((i + 1) + ": " + s.getExperience().get(i) + " years");
+                }
+            } else if (select == 4) {
+                for (int i = 0; i < s.getOccupation().size(); i++) {
+                    System.out.println((i + 1) + ": " + s.getOccupation().get(i));
+                }
+            } else if (select == 5) {
+                System.out.println(s.getHealthRecord());
+            } else if (select == 6) {
+                System.out.println(s.getCriminalRecord());
+            } else if (select == 7) {
+                System.out.println(s.getComputerSkill());
+            } else if (select == 8) {
+                for (int i = 0; i < s.getLanguageSpoken().size(); i++) {
+                    System.out.println((i + 1) + ": " + s.getLanguageSpoken().get(i));
+                }
             }
-            if (select == 2) {
-                addQualification(select, s);
+            int editSelect = inputInt("Press 1 to add" + "\nPress 2 to delete" + "\nPress 0 to go back");
+            editSelect = valueSelect(0, 2, editSelect);
+            boolean isEmpty = checkEmpty(select, s);
+            while (isEmpty & editSelect == 2) {
+                editSelect = inputInt("This criteria is empty. You can not delete it. Please select again");
             }
-            if (select == 3) {
-                addWorkExp(select, s);
+            if (editSelect == 1) {
+                if (select == 1) {
+                    addAgeRange(s, select);
+                }
+                if (select == 2) {
+                    addQualification(select, s);
+                }
+                if (select == 3) {
+                    addWorkExp(select, s);
+                }
+                if (select == 4) {
+                    addOcc(select, s);
+                }
+                if (select == 5) {
+                    addHealth(select, s);
+                }
+                if (select == 6) {
+                    addCri(select, s);
+                }
+                if (select == 7) {
+                    addComSkill(select, s);
+                }
+                if (select == 8) {
+                    addLanguage(select, s);
+                }
+            } else if (editSelect == 2) {
+                delete(select, s);
+            } else if (editSelect == 0) {
+                check = false;
             }
-            if (select == 4) {
-                addOcc(select, s);
-            }
-            if (select == 5) {
-                addHealth(select, s);
-            }
-            if (select == 6) {
-                addCri(select, s);
-            }
-            if (select == 7) {
-                addComSkill(select, s);
-            }
-            if (select == 8) {
-                addLanguage(select, s);
-            }
-        } else if (editSelect == 2) {
-            delete(select,s);
-        } else if (editSelect == 0) {
-            criteriaMenu(s);
         }
+        mission.setSelectionCriteria(s);
+        criteriaMenu(mission);
     }
 
     private void addAgeRange(SelectionCriteria s, int select) {
@@ -137,7 +134,7 @@ public class EmployFast {
         }
         s.setMinimumAge(minAge);
         s.setMaximumAge(maxAge);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addQualification(int select, SelectionCriteria s) {
@@ -146,7 +143,7 @@ public class EmployFast {
         ArrayList<String> newQua = s.getQualification();
         newQua.add(qua);
         s.setQualification(newQua);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addWorkExp(int select, SelectionCriteria s) {
@@ -155,7 +152,7 @@ public class EmployFast {
         ArrayList<Integer> newWorkExp = s.getExperience();
         newWorkExp.add(workExp);
         s.setExperience(newWorkExp);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addOcc(int select, SelectionCriteria s) {
@@ -164,28 +161,28 @@ public class EmployFast {
         ArrayList<String> newOcc = s.getOccupation();
         newOcc.add(occ);
         s.setOccupation(newOcc);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addHealth(int select, SelectionCriteria s) {
         System.out.print('\u000C');
         String health = inputString("Please add the health record");
         s.setHealthRecord(health);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addCri(int select, SelectionCriteria s) {
         System.out.print('\u000C');
         String cri = inputString("Please add the criminal record");
-        s.setHealthRecord(cri);
-        criteriaEditMenu(select, s);
+        s.setCriminalRecord(cri);
+        //criteriaEditMenu(select, s);
     }
 
     private void addComSkill(int select, SelectionCriteria s) {
         System.out.print('\u000C');
         String com = inputString("Please add the computer skill");
         s.setHealthRecord(com);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void addLanguage(int select, SelectionCriteria s) {
@@ -194,7 +191,7 @@ public class EmployFast {
         ArrayList<String> newLan = s.getLanguageSpoken();
         newLan.add(lan);
         s.setLanguageSpoken(newLan);
-        criteriaEditMenu(select, s);
+        //criteriaEditMenu(select, s);
     }
 
     private void delete(int select, SelectionCriteria s){
@@ -206,10 +203,10 @@ public class EmployFast {
             if (i == 1){
                 s.setMinimumAge(0);
                 s.setMaximumAge(0);
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 2){
@@ -223,10 +220,10 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getQualification().size(),selection);
                 s.getQualification().remove((selection - 1));
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 3){
@@ -239,10 +236,10 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getExperience().size(),selection);
                 s.getExperience().remove((selection - 1));
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 4){
@@ -255,10 +252,10 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getOccupation().size(),selection);
                 s.getOccupation().remove((selection - 1));
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 5){
@@ -267,10 +264,10 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setHealthRecord("");
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 6){
@@ -279,10 +276,10 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setCriminalRecord("");
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 6){
@@ -291,10 +288,10 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setComputerSkill("");
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
         if (select == 7){
@@ -307,10 +304,10 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getLanguageSpoken().size(),selection);
                 s.getExperience().remove((selection - 1));
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                criteriaEditMenu(select, s);
+                //criteriaEditMenu(select, s);
             }
         }
     }
