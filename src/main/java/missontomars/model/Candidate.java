@@ -21,6 +21,7 @@ public class Candidate {
     private String healthRecord;
     private String criminalRecord;
     private String computerSkill;
+    private boolean acceptOrRegect;
 
     public Candidate() {
     }
@@ -180,5 +181,56 @@ public class Candidate {
 
     public void setComputerSkill(String computerSkill) {
         this.computerSkill = computerSkill;
+    }
+
+    public String displayCandidate() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(" \n");
+
+
+
+        sb.append("Candidate name: " + name + "\n \t");
+        sb.append("Candidate DOB: " + dob + "\n \t");
+        sb.append("Candidate City: " + city + "\n \t");
+        sb.append("Candidate Postal: " + postal + "\n \t");
+        sb.append("Candidate Nationality: " + nationality + "\n \t");
+        sb.append("Candidate Identification: " + identitification + "\n \t");
+        sb.append("Candidate Gender: " + gender + "\n \t");
+
+        sb.append("Candidate Allergies: " );
+        for (int i = 0; i < allergies.size(); i++) {
+            sb.append(allergies.get(i));
+        }
+
+        sb.append("Candidate foodPreference: " );
+        for (int i = 0; i < foodPreference.size(); i++) {
+            sb.append(foodPreference.get(i));
+        }
+
+        sb.append("Candidate Language Preference: " );
+        for (int i = 0; i < languagesSpoken.size(); i++) {
+            sb.append(languagesSpoken.get(i));
+        }
+
+        sb.append("Candidate Work experience: " );
+        for (int i = 0; i < workExperience.size(); i++) {
+            sb.append(workExperience.get(i));
+        }
+        sb.append("Candidate qualification: " );
+        for (int i = 0; i < qualification.size(); i++) {
+            sb.append(qualification.get(i));
+        }
+
+        sb.append("Candidate Work experience: " );
+        for (int i = 0; i < workExperience.size(); i++) {
+            sb.append(workExperience.get(i));
+        }
+
+        sb.append("Candidate HealthRecord: " + healthRecord + "\n \t");
+        sb.append("Candidate Criminal Record: " + criminalRecord + "\n \t");
+        sb.append("Candidate Computer Skill: " + computerSkill + "\n \t");
+
+
+        return sb.toString();
     }
 }
