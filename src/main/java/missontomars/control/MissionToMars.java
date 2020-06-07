@@ -254,10 +254,15 @@ public class MissionToMars {
         for (int i = 0; i < numberOfMission; i++) {
             sb.append((i + 1) + "： " + listOfMission.get(i).getMissionName() + "\n");
         }
+        if ( userType.equals("Coordinator")) {
+            sb.append("4: " + "Create a new mission");
+            Mission newMission = new Mission ();
+        }
+
         System.out.println(sb.toString());
 
         int missionSelect = inputInt("Select mission number to edit", sb.toString());
-        while (missionSelect < 1 || missionSelect > numberOfMission) {
+        while (missionSelect < 1 || missionSelect > numberOfMission + 1 ) {
             System.out.println(" ");
             System.out.println(sb.toString());
             missionSelect = inputInt("Please choose the right option", sb.toString());

@@ -41,9 +41,9 @@ public class EmploymentFastSystem {
 
     public void selectNBestCandidate(Mission misson){
         PopulateCandidateData pcd = new PopulateCandidateData();
-
-
         SelectCandidates sc = new SelectCandidates();
+
+
         sc.confirmCandidates(pcd.populateDataCandidate());
 
     }
