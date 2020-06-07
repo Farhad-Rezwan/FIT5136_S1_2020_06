@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GetShuttle {
+    /**
+     * Method which read shuttle information from file
+     * @return A arrayList of the shuttle information
+     */
     public ArrayList<String[]> readShuttle(){
         ArrayList<String[]> shuttle = new ArrayList<>();
         try {
@@ -32,6 +36,11 @@ public class GetShuttle {
         return shuttle;
     }
 
+    /**
+     * Method which select the shuttle
+     * @param shuttleSelected A arrayList of the shuttle information from the file
+     * @return A selected shuttle
+     */
     public Shuttle selectShuttle(ArrayList<String[]> shuttleSelected){
         Scanner sc = new Scanner(System.in);
         System.out.println("Please input the shuttle id for mission");

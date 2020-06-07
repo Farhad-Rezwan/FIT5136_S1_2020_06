@@ -7,11 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PopulateCandidateData {
+    /**
+     * Constructor
+     */
     public PopulateCandidateData() {
     }
 
-
-
+    /**
+     * Method which created the candidates
+     * @return A list of candidates
+     */
     public List<Candidate> populateDataCandidate() {
 
 

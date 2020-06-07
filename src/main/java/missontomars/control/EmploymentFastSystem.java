@@ -8,10 +8,17 @@ import java.util.Scanner;
 
 // when we come from feature 2 we join here in this class
 public class EmploymentFastSystem {
+    /**
+     * Constructor
+     */
     public EmploymentFastSystem(){
 
     }
 
+    /**
+     * Method which connect feature 2 and feature 3
+     * @param mission The selected mission in feature 1
+     */
     public void selectCriEntry(Mission mission){
         boolean check = true;
         while (check) {
@@ -39,6 +46,10 @@ public class EmploymentFastSystem {
 
     }
 
+    /**
+     * Method for feature 4
+     * @param misson The selected mission in feature 1
+     */
     public void selectNBestCandidate(Mission misson){
         PopulateCandidateData pcd = new PopulateCandidateData();
         SelectCandidates sc = new SelectCandidates();
@@ -48,6 +59,11 @@ public class EmploymentFastSystem {
 
     }
 
+
+    /**
+     * Method which show employment requirement
+     * @param mission The selected mission in feature 1
+     */
     private void displayEmp(Mission mission){
         if (mission.getJob().size() == 0){
             System.out.println("No employment requirement information");
@@ -61,6 +77,10 @@ public class EmploymentFastSystem {
         select = valueSelect(0,0,select);
     }
 
+    /**
+     * Method which show shuttle information
+     * @param shuttle Selected shuttle
+     */
     private void displayShuttle(Shuttle shuttle){
         System.out.println("Shuttle id: " + shuttle.getId()
                 + "\nShuttle name: " + shuttle.getShuttleName()

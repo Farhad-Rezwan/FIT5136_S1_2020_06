@@ -29,6 +29,10 @@ public class EmploymentRequirement {
         this.jobTitle = jobTitle;
     }
 
+    /**
+     * Method which display job title
+     * @return A display string
+     */
     public String displayJobTitles() {
         StringBuilder sb = new StringBuilder();
 

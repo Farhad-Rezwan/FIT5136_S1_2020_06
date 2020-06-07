@@ -65,6 +65,10 @@ public class CargoRequirement {
 //        this.cargoFor = cargoFor;
 //    }
 
+    /**
+     * Method which set cargoFor
+     * @param cargoFor A string of cargoFor
+     */
     public void setCargoFor(String cargoFor) {
         ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
         cargoForArrayPredefinedList.add("Mission");
@@ -121,6 +125,10 @@ public class CargoRequirement {
         this.cargoQuantity = cargoQuantity;
     }
 
+    /**
+     * Method which display the cargo requirements
+     * @return A display string
+     */
     public String displayCargoRequirement() {
         StringBuilder sb = new StringBuilder();
         sb.append("Cargo Requirement: \n \t");

@@ -38,6 +38,10 @@ public class Cargo {
         this.quantityAvailable = quantityAvailable;
     }
 
+    /**
+     * Method for displaying the cargo information
+     * @return A display string
+     */
     public String displayCargo () {
         StringBuilder sb = new StringBuilder();
         sb.append("Cargo id: " + cargoId + ", cargo : " + cargo + ", cargo quantity available: " + quantityAvailable);

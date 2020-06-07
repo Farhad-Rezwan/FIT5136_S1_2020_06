@@ -48,6 +48,10 @@ public class Job {
         this.employmentRequirements.add(employmentRequirement);
     }
 
+    /**
+     * Method which display the job
+     * @return A display string
+     */
     public String displayJob() {
         StringBuilder sb = new StringBuilder();
         sb.append("Job information: \n \t");
@@ -87,6 +91,9 @@ public class Job {
         }
     }*/
 
+    /**
+     * Method which deletes the job title
+     */
     public void deleteTitle(){
         displayTitle();
         int deleteNum = inputInt("Enter the number you want to delete");
@@ -95,6 +102,9 @@ public class Job {
 
     }
 
+    /**
+     * Method which add job title
+     */
     public void addTitle(){
         String titleName = inputString("Enter title name");
         int requireNum = inputInt("Enter requirement numbers of employee");
@@ -137,6 +147,9 @@ public class Job {
         return select;
     }
 
+    /**
+     * Method which display the title
+     */
     public void displayTitle(){
         System.out.println("Title:");
         for (int i =0; i < getEmploymentRequirements().size(); i++){

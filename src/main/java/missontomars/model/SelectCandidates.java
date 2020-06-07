@@ -9,6 +9,11 @@ public class SelectCandidates {
     public SelectCandidates() {
     }
 
+    /**
+     * Method which ask the candidates to confirm or reject
+     * @param originalCandidates list of the candidate to make decision
+     * @return A list of confirmed candidates
+     */
     public static List<Candidate> confirmCandidates(List<Candidate> originalCandidates) {
         Scanner scanner = new Scanner(System.in);
         List<Candidate> confirmedCandidates = new ArrayList<>();
