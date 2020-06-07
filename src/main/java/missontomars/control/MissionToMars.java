@@ -247,7 +247,8 @@ public class MissionToMars {
 
     }
 
-    public int idToEditView() {
+    public void idToEditView() {
+        int maxOption;
         int numberOfMission = listOfMission.size();
         StringBuilder sb = new StringBuilder();
 
@@ -255,8 +256,8 @@ public class MissionToMars {
             sb.append((i + 1) + "： " + listOfMission.get(i).getMissionName() + "\n");
         }
         if ( userType.equals("Coordinator")) {
-            sb.append("4: " + "Create a new mission");
-            Mission newMission = new Mission ();
+            sb.append((numberOfMission + 1) +  "： " + "Create a new mission");
+
         }
 
         System.out.println(sb.toString());
@@ -268,10 +269,13 @@ public class MissionToMars {
             missionSelect = inputInt("Please choose the right option", sb.toString());
 
         }
-
-        missionCreateMenu(listOfMission.get(missionSelect - 1));
-//        System.out.println("Selected");
-        return missionSelect;
+        if (missionSelect == numberOfMission + 1) {
+            Mission mission = new Mission();
+            listOfMission.add(mission);
+            missionCreateMenu(listOfMission.get(missionSelect -1 ));
+        } else {
+            missionCreateMenu(listOfMission.get(missionSelect - 1));
+        }
     }
 
     // 2.
@@ -1031,7 +1035,7 @@ public class MissionToMars {
     public void readMission() {
         ReadMission readMission = new ReadMission();
         ArrayList<Mission> missions = readMission.readMission();
-        readMission.displayMission(missions);
+//        readMission.displayMission(missions);
 //        Scanner sc = new Scanner(System.in);
 //        System.out.println("Please select the mission id");
 //        String missionId = inputString("Please select the mission id");

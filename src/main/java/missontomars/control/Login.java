@@ -35,7 +35,7 @@ public class Login {
         Boolean success = false;
         for(int i=0; i<allUser.size(); i++){
             if(allUser.get(i)[1].equals(usernameInput) && allUser.get(i)[2].equals(passwordInput)){
-                user = new User(Integer.parseInt(allUser.get(i)[0]),allUser.get(i)[0],allUser.get(i)[0],allUser.get(i)[0]);
+                user = new User(Integer.parseInt(allUser.get(i)[0]),allUser.get(i)[1],allUser.get(i)[2],allUser.get(i)[3]);
                 System.out.println("Welcome "+allUser.get(i)[1]);
                 success = true;
             }

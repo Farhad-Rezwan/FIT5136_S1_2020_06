@@ -1,9 +1,11 @@
 package main.java.missontomars.control;
 
+import main.java.missontomars.model.Candidate;
 import main.java.missontomars.model.Mission;
 import main.java.missontomars.model.SelectCandidates;
 import main.java.missontomars.model.Shuttle;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 // when we come from feature 2 we join here in this class
@@ -43,8 +45,30 @@ public class EmploymentFastSystem {
         PopulateCandidateData pcd = new PopulateCandidateData();
         SelectCandidates sc = new SelectCandidates();
 
+        StringBuilder str = new StringBuilder();
+        ArrayList<Candidate> candidatesToShow = (ArrayList<Candidate>) pcd.populateDataCandidate();
+        ArrayList<Candidate> candidatesSelected = new ArrayList<>();
 
-        sc.confirmCandidates(pcd.populateDataCandidate());
+        for (int i = 0; i < candidatesToShow.size(); i ++) {
+            str.append( (i + 1) + ": " + candidatesToShow.get(i).getName() + "\n");
+        }
+
+        str.append("Please select the number of candidate to choose");
+        System.out.println(str.toString());
+
+        int choise = valueSelect(1, candidatesToShow.size());
+
+        System.out.println(candidatesToShow.get(choise -1 ).getName() + " has been selected for the mission");
+        System.out.println("An offer has been sent");
+
+
+        candidatesSelected.add(candidatesToShow.get(choise-1));
+
+
+
+
+
+        sc.confirmCandidates(candidatesSelected);
 
     }
 
@@ -96,6 +120,14 @@ public class EmploymentFastSystem {
             }
         }
         return integer;
+    }
+
+    private int valueSelect(int min, int max) {
+        int select = -1;
+        while (!(min <= select & select <= max)) {
+            select = inputInt("Please select an option");
+        }
+        return select;
     }
 
 }

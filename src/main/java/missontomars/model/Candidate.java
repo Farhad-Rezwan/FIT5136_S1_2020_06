@@ -21,7 +21,6 @@ public class Candidate {
     private String healthRecord;
     private String criminalRecord;
     private String computerSkill;
-    private boolean acceptOrRegect;
 
     public Candidate() {
     }

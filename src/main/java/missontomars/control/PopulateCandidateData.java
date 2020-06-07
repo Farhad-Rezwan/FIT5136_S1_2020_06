@@ -3,16 +3,19 @@ package main.java.missontomars.control;
 import main.java.missontomars.model.Candidate;
 import main.java.missontomars.model.SelectCandidates;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PopulateCandidateData {
+    private ArrayList<Candidate> listOfCandidates;
     public PopulateCandidateData() {
+
     }
 
 
 
-    public List<Candidate> populateDataCandidate() {
+    public ArrayList<Candidate> populateDataCandidate() {
 
 
 //        candidate 1;
@@ -48,7 +51,7 @@ public class PopulateCandidateData {
         ArrayList<Integer> workExperience2 = new ArrayList<>();
         workExperience2.add(12);
 
-        Candidate candidate2 = new Candidate(12, "Farhad", "21212"
+        Candidate candidate2 = new Candidate(12, "Swapnil", "21212"
                 , "Melbuorne", "1212"
                 , "Ausgtraliana", "Identiif"
                 , "G", allergies2, foodPreference2, qualification2, occupation2, languagesSpoken2
@@ -73,7 +76,7 @@ public class PopulateCandidateData {
         ArrayList<Integer> workExperience3 = new ArrayList<>();
         workExperience3.add(12);
 
-        Candidate candidate3 = new Candidate(12, "Farhad", "21212"
+        Candidate candidate3 = new Candidate(12, "Louis", "21212"
                 , "Melbuorne", "1212"
                 , "Ausgtraliana", "Identiif"
                 , "G", allergies3, foodPreference3, qualification3, occupation3, languagesSpoken3
@@ -81,7 +84,7 @@ public class PopulateCandidateData {
 
 
 
-        List<Candidate> candidateList = new ArrayList<>();
+        ArrayList<Candidate> candidateList = new ArrayList<>();
 
 
         candidateList.add(candidate);

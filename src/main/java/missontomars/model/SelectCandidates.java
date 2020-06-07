@@ -10,13 +10,15 @@ public class SelectCandidates {
     }
 
     public static List<Candidate> confirmCandidates(List<Candidate> originalCandidates) {
+
         Scanner scanner = new Scanner(System.in);
         List<Candidate> confirmedCandidates = new ArrayList<>();
         for(Candidate candidate : originalCandidates) {
-            System.out.println(String.format("Congrats %s, you have been selected on mission to mars\n",candidate.getName()));
-            System.out.println("Do you accept the mission ? Y/N");
+//            System.out.println(String.format("Congrats %s, you have been selected on mission to mars\n",candidate.getName()));
+            System.out.println("Confirm yur selection? Y/N");
             if(scanner.nextLine().equalsIgnoreCase("Y")) {
                 confirmedCandidates.add(candidate);
+                System.out.println("Offer has been successfully made" );
             }
             System.out.println("\n******************************\n");
         }
