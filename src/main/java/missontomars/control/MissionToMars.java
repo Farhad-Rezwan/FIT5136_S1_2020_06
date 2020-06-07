@@ -11,9 +11,10 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class MissionToMars {
+    private static String userType;
     ArrayList<Mission> listOfMission;
     ArrayList<Shuttle> listOfShuttle;
-    String userType;
+    //String userType;
 
 
 
@@ -30,6 +31,11 @@ public class MissionToMars {
 
 
     public static void login() {
+        //Login starts here
+        Login login = new Login();
+        ArrayList<String[]> allUser = login.readUser();
+        User user = login.login(allUser);
+        userType = user.getAccountType();
 
         //Feature2 starts here
         GetShuttle getShuttle = new GetShuttle();
@@ -231,6 +237,10 @@ public class MissionToMars {
         String missionName = inputString("Please insert mission name: ");
         mission.setMissionName(missionName);
         missionEditMenu(select, mission);
+    }
+
+    private void getAllMission(){
+
     }
 
     private void idToEditView() {

@@ -163,6 +163,10 @@ public class Mission {
         return missionType;
     }
 
+    public void setMissionType(String missionType) {
+        this.missionType = missionType;
+    }
+
     public ArrayList<Job> getJob() {
         return job;
     }
