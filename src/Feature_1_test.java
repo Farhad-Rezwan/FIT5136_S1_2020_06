@@ -14,8 +14,9 @@ public class Feature_1_test {
         login();
         MissionToMars mtm = new MissionToMars();
         mtm.readMission();
-        int missionSelected = mtm.idToEditView();
-        mtm.feature2(missionSelected);
+        mtm.idToEditView();
+
+//        mtm.feature2(missionSelected);
 
 //        missionCreateMenu();
 

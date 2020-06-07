@@ -11,7 +11,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ReadMission {
+
     ArrayList<Mission> missions = new ArrayList<>();
+
+    public ReadMission() {
+    }
+
     public ArrayList<Mission> readMission() {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         SelectionCriteria selectionCriteria = new SelectionCriteria();

@@ -74,15 +74,19 @@ public class MissionToMars {
                 + "\nPress 9 for cargo requirement"
                 + "\nPress 10 for status of mission"
                 + "\nPress 11 for mission overall information"
+                + "\nPress 12 for setting the shuttle for the mission"
                 + "\nPress 0 to back"
                 + "\n");
-        int select = valueSelect(0, 11);
+        int select = valueSelect(0, 12);
         if (select == 0) {
             idToEditView();
         } else if (0 < select & select < 11) {
             missionEditMenu(select, mission);
         } else if (select == 11) {
             showOverallInformation(mission);
+        } else if (select == 12) {
+            int index = listOfMission.indexOf(mission);
+            feature2(index);
         }
     }
 
@@ -1025,30 +1029,30 @@ public class MissionToMars {
         readMission.displayMission(missions);
 //        Scanner sc = new Scanner(System.in);
 //        System.out.println("Please select the mission id");
-        String missionId = inputString("Please select the mission id");
+//        String missionId = inputString("Please select the mission id");
 //        sc.close();
-        for(int i=0; i<missions.size(); i++) {
-            if (Integer.toString(missions.get(i).getId()).equals(missionId)) {
-                System.out.println(missions.get(i).getId());
-                System.out.println(missions.get(i).getMissionName());
-                System.out.println(missions.get(i).getLaunchDate());
-                System.out.println(missions.get(i).getMissionOrigin());
-                String countries = "";
-                for (int j = 0; j < missions.get(i).getCountriesAllowed().size(); j++) {
-                    countries = countries + missions.get(i).getCountriesAllowed().get(j) + " ";
-                }
-                System.out.println(countries);
-                System.out.println(missions.get(i).getDuration());
-                System.out.println(missions.get(i).getMissionType());
-                System.out.println(missions.get(i).getJob());
-                System.out.println(missions.get(i).getMissionDescription());
-                System.out.println(missions.get(i).getEmploymentRequirements());
-                System.out.println(missions.get(i).getSelectionCriteria());
-                System.out.println(missions.get(i).getCargoRequirement());
-                System.out.println(missions.get(i).getDestinationAddress());
-                System.out.println(missions.get(i).getStatus());
-            }
-        }
+//        for(int i=0; i<missions.size(); i++) {
+//            if (Integer.toString(missions.get(i).getId()).equals(missionId)) {
+////                System.out.println(missions.get(i).getId());
+//                System.out.println(missions.get(i).getMissionName());
+//                System.out.println(missions.get(i).getLaunchDate());
+//                System.out.println(missions.get(i).getMissionOrigin());
+//                String countries = "";
+//                for (int j = 0; j < missions.get(i).getCountriesAllowed().size(); j++) {
+//                    countries = countries + missions.get(i).getCountriesAllowed().get(j) + " ";
+//                }
+//                System.out.println(countries);
+//                System.out.println(missions.get(i).getDuration());
+//                System.out.println(missions.get(i).getMissionType());
+//                System.out.println(missions.get(i).getJob());
+//                System.out.println(missions.get(i).getMissionDescription());
+//                System.out.println(missions.get(i).getEmploymentRequirements());
+//                System.out.println(missions.get(i).getSelectionCriteria());
+//                System.out.println(missions.get(i).getCargoRequirement());
+//                System.out.println(missions.get(i).getDestinationAddress());
+//                System.out.println(missions.get(i).getStatus());
+//            }
+//        }
         listOfMission = missions;
     }
 
@@ -1057,6 +1061,8 @@ public class MissionToMars {
         ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
         Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
         listOfMission.get(missionSelected).setShuttle(shuttle);
+        EmploymentFastSystem employmentFastSystem = new EmploymentFastSystem();
+        employmentFastSystem.selectCriEntry(listOfMission.get(missionSelected));
     }
 
 
