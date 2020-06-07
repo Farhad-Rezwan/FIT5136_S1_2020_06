@@ -243,7 +243,7 @@ public class MissionToMars {
 
     }
 
-    public void idToEditView() {
+    public int idToEditView() {
         int numberOfMission = listOfMission.size();
         StringBuilder sb = new StringBuilder();
 
@@ -262,7 +262,7 @@ public class MissionToMars {
 
         missionCreateMenu(listOfMission.get(missionSelect - 1));
 //        System.out.println("Selected");
-
+        return missionSelect;
     }
 
     // 2.
@@ -1050,6 +1050,13 @@ public class MissionToMars {
             }
         }
         listOfMission = missions;
+    }
+
+    public void feature2(int missionSelected){
+        GetShuttle getShuttle = new GetShuttle();
+        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
+        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
+        listOfMission.get(missionSelected).setShuttle(shuttle);
     }
 
 

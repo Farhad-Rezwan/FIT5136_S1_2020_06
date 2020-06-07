@@ -2,7 +2,7 @@ package main.java.missontomars.model;
 
 
 
-import sun.jvm.hotspot.opto.Phase;
+//import sun.jvm.hotspot.opto.Phase;
 
 import javax.print.attribute.standard.Destination;
 import java.util.ArrayList;
@@ -24,9 +24,6 @@ public class Mission {
     CargoRequirement cargoRequirement;
     ArrayList<EmploymentRequirement> employmentRequirements;
     private SelectionCriteria selectionCriteria;
-
-
-
     Shuttle shuttle;
 
     public Mission() {
