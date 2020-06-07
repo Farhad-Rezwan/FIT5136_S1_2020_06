@@ -1057,12 +1057,16 @@ public class MissionToMars {
     }
 
     public void feature2(int missionSelected){
-        GetShuttle getShuttle = new GetShuttle();
-        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
-        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
-        listOfMission.get(missionSelected).setShuttle(shuttle);
-        EmploymentFastSystem employmentFastSystem = new EmploymentFastSystem();
-        employmentFastSystem.selectCriEntry(listOfMission.get(missionSelected));
+        boolean check = true;
+        while (check) {
+            GetShuttle getShuttle = new GetShuttle();
+            ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
+            Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
+            listOfMission.get(missionSelected).setShuttle(shuttle);
+
+            EmploymentFastSystem employmentFastSystem = new EmploymentFastSystem();
+            employmentFastSystem.selectCriEntry(listOfMission.get(missionSelected));
+        }
     }
 
 

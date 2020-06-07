@@ -36,7 +36,6 @@ public class GetShuttle {
         Scanner sc = new Scanner(System.in);
         System.out.println("Please input the shuttle id for mission");
         String shuttleId = sc.nextLine();
-        sc.close();
         String[] shuttle1 = new String[8];
         for (String[] strings : shuttleSelected) {
             if (shuttleId.equals(strings[0])) {

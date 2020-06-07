@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class SelectCandidates {
 
+    public SelectCandidates() {
+    }
+
     public static List<Candidate> confirmCandidates(List<Candidate> originalCandidates) {
         Scanner scanner = new Scanner(System.in);
         List<Candidate> confirmedCandidates = new ArrayList<>();

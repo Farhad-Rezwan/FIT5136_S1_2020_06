@@ -1,5 +1,6 @@
 package main.java.missontomars.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Candidate {
@@ -11,17 +12,20 @@ public class Candidate {
     private String nationality;
     private String identitification;
     private String gender;
-    private List<String> allergies;
-    private List<String> foodPreference;
-    private List<String> qualification;
-    private List<String> occupation;
-    private List<String> languagesSpoken;
-    private List<Integer> workExperience;
+    private ArrayList<String> allergies;
+    private ArrayList<String> foodPreference;
+    private ArrayList<String> qualification;
+    private ArrayList<String> occupation;
+    private ArrayList<String> languagesSpoken;
+    private ArrayList<Integer> workExperience;
     private String healthRecord;
     private String criminalRecord;
     private String computerSkill;
 
-    public Candidate(int id, String name, String dob, String city, String postal, String nationality, String identitification, String gender, List<String> allergies, List<String> foodPreference, List<String> qualification, List<String> occupation, List<String> languagesSpoken, List<Integer> workExperience, String healthRecord, String criminalRecord, String computerSkill) {
+    public Candidate() {
+    }
+
+    public Candidate(int id, String name, String dob, String city, String postal, String nationality, String identitification, String gender, ArrayList<String> allergies, ArrayList<String> foodPreference, ArrayList<String> qualification, ArrayList<String> occupation, ArrayList<String> languagesSpoken, ArrayList<Integer> workExperience, String healthRecord, String criminalRecord, String computerSkill) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -40,6 +44,7 @@ public class Candidate {
         this.criminalRecord = criminalRecord;
         this.computerSkill = computerSkill;
     }
+
 
     public int getId() {
         return id;
@@ -105,51 +110,51 @@ public class Candidate {
         this.gender = gender;
     }
 
-    public List<String> getAllergies() {
+    public ArrayList<String> getAllergies() {
         return allergies;
     }
 
-    public void setAllergies(List<String> allergies) {
+    public void setAllergies(ArrayList<String> allergies) {
         this.allergies = allergies;
     }
 
-    public List<String> getFoodPreference() {
+    public ArrayList<String> getFoodPreference() {
         return foodPreference;
     }
 
-    public void setFoodPreference(List<String> foodPreference) {
+    public void setFoodPreference(ArrayList<String> foodPreference) {
         this.foodPreference = foodPreference;
     }
 
-    public List<String> getQualification() {
+    public ArrayList<String> getQualification() {
         return qualification;
     }
 
-    public void setQualification(List<String> qualification) {
+    public void setQualification(ArrayList<String> qualification) {
         this.qualification = qualification;
     }
 
-    public List<String> getOccupation() {
+    public ArrayList<String> getOccupation() {
         return occupation;
     }
 
-    public void setOccupation(List<String> occupation) {
+    public void setOccupation(ArrayList<String> occupation) {
         this.occupation = occupation;
     }
 
-    public List<String> getLanguagesSpoken() {
+    public ArrayList<String> getLanguagesSpoken() {
         return languagesSpoken;
     }
 
-    public void setLanguagesSpoken(List<String> languagesSpoken) {
+    public void setLanguagesSpoken(ArrayList<String> languagesSpoken) {
         this.languagesSpoken = languagesSpoken;
     }
 
-    public List<Integer> getWorkExperience() {
+    public ArrayList<Integer> getWorkExperience() {
         return workExperience;
     }
 
-    public void setWorkExperience(List<Integer> workExperience) {
+    public void setWorkExperience(ArrayList<Integer> workExperience) {
         this.workExperience = workExperience;
     }
 

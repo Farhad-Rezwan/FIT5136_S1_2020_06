@@ -1,6 +1,7 @@
 package main.java.missontomars.control;
 
 import main.java.missontomars.model.Mission;
+import main.java.missontomars.model.SelectCandidates;
 import main.java.missontomars.model.Shuttle;
 
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class EmploymentFastSystem {
                     + "\nPress 3 to view selected shuttle"
                     + "\nPress 4 to select candidates"
                     + "\nPress 0 to back to change a shuttle");
-            select = valueSelect(0, 3, select);
+            select = valueSelect(0, 4, select);
             if (select == 2) {
                 EmployFast employFast = new EmployFast();
                 employFast.criteriaMenu(mission);
@@ -31,12 +32,19 @@ public class EmploymentFastSystem {
             }
             else if (select == 0){
                 check = false;
+            } else if (select == 4) {
+                selectNBestCandidate(mission);
             }
         }
 
     }
 
     public void selectNBestCandidate(Mission misson){
+        PopulateCandidateData pcd = new PopulateCandidateData();
+
+
+        SelectCandidates sc = new SelectCandidates();
+        sc.confirmCandidates(pcd.populateDataCandidate());
 
     }
 
