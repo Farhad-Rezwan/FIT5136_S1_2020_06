@@ -14,7 +14,6 @@ public class MissionToMars {
     private static String userType;
     private static ArrayList<Mission> listOfMission;
     private static ArrayList<Shuttle> listOfShuttle;
-    //String userType;
 
 
 
@@ -28,7 +27,7 @@ public class MissionToMars {
     }
 
 
-
+    // login display
 
     public static void login() {
         //Login starts here
@@ -37,10 +36,6 @@ public class MissionToMars {
         User user = login.login(allUser);
         userType = user.getAccountType();
 
-        //Feature2 starts here
-//        GetShuttle getShuttle = new GetShuttle();
-//        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
-//        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
     }
 
     public ArrayList<Mission> getListOfMission() {
@@ -116,6 +111,7 @@ public class MissionToMars {
         System.out.println(displayHeader(select, mission));
     }
 
+    // displays information when you choose to edit that option
     private String displayHeader(int select, Mission mission) {
 
         StringBuilder str = new StringBuilder();
@@ -198,7 +194,7 @@ public class MissionToMars {
         return str.toString();
     }
 
-
+    // add the entries, nevigates through edit options
     private void addEntries(int select, Mission mission) {
 
         switch (select) {
@@ -309,7 +305,7 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
-    // 6.
+    // 6. destination address selection menu
     private void addDestinationAddress(int select, Mission mission) {
         System.out.print("Select destination address: "
                 + "\nPress 1 INSIGHT"
@@ -367,55 +363,6 @@ public class MissionToMars {
 
 
 
-    // 8.
-
-    private void jobsShowView(Mission mission) {
-        int numberOfJob = mission.getJob().size();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < numberOfJob; i++) {
-            sb.append((i + 1) + "： " + mission.getJob().get(i).getJobName() + "\n");
-        }
-        System.out.println(sb.toString());
-
-        int jobSelect = inputInt("Select job Number to edit", sb.toString());
-        while (jobSelect < 1 || jobSelect > numberOfJob) {
-            System.out.println(" ");
-            System.out.println(sb.toString());
-            jobSelect = inputInt("Please choose the right option", sb.toString());
-
-        }
-
-        editJobsMenu(listOfMission.get(jobSelect - 1));
-        System.out.println("Selected");
-
-    }
-
-
-//    private void addJob2(Mission mission) {
-//        getJobId(mission);
-//
-//        if (null != job) {
-//            System.out.print("Selected Job :" + job.getJobName()
-//                    + "\nPress 1 for job name"
-//                    + "\nPress 2 for job description"
-//                    + "\nPress 3 for employment requirement"
-//                    + "\nPress 0 to go back");
-//            int select = valueSelect(0, 4);
-//            if (select == 0) {
-//                missionEditMenu(select, mission);;
-//            } else if (0 < select & select < 3) {
-////            jobEditMenu(select, job);
-//            }
-//
-//            missionEditMenu(select, mission);
-//
-//        } else {
-//            missionEditMenu(0, mission);
-//        }
-//
-//
-//    }
 
 
     private void editJobsMenu(Mission mission) {
@@ -465,6 +412,10 @@ public class MissionToMars {
         addEmploymentRequirement(job, mission);
     }
 
+    /**
+     * job edit menu for the job name, description and employment requiremets
+     */
+
     private void jobEditMenu(Job job, Mission mission) {
 
         System.out.println(job.displayJob());
@@ -478,7 +429,6 @@ public class MissionToMars {
         }
 
         if (editSelect == 0) {
-//            System.out.println(displayHeaderJob(editSelect, job));
             System.out.println(displayHeader(8, mission));
             editJobsMenu(mission);
         } else {
@@ -488,7 +438,6 @@ public class MissionToMars {
 
 
 
-//        System.out.println(displayHeaderJob(select, job));
     }
 
     private String displayHeaderJob(int select, Job job) {
@@ -579,6 +528,10 @@ public class MissionToMars {
         }
     }
 
+    /**
+     * to create new employment requirements
+     */
+
     public void createNewEmploymentrequirement(Mission mission, Job job) {
         ArrayList<EmploymentRequirement> empList = new ArrayList<>();
         String jobTitle  = inputString("Please insert job title ");
@@ -588,7 +541,9 @@ public class MissionToMars {
         addEmploymentRequirement(job, mission);
     }
 
-
+    /**
+     * employment requirment menu selection
+     */
     private void employmentRequirementEditMenu(EmploymentRequirement empReq, Job job, Mission mission) {
         System.out.println(empReq.displayJobTitles());
 
@@ -609,6 +564,7 @@ public class MissionToMars {
 
     }
 
+    // for editing the employment requirments
     private void editEmploymentrequirementEntries(int select, Job job, EmploymentRequirement empRec, Mission mission) {
 
         switch (select) {
@@ -621,6 +577,7 @@ public class MissionToMars {
         }
     }
 
+    // for adding job title
     private void addTitleName(Job job, EmploymentRequirement employmentRequirement, Mission mission) {
         System.out.print('\u000C');
         String titleName  = inputString("Please insert job title name: ");
@@ -663,7 +620,7 @@ public class MissionToMars {
 
 
 
-    //  9.
+    //  9. for adding cargo requirements
     private void addCargoRequirement(int select, Mission mission){
         System.out.print('\u000C');
         if (null != mission.getCargoRequirement()) {
@@ -709,7 +666,7 @@ public class MissionToMars {
 
 
     }
-    // 10.
+    // 10. for addiong status
     private void addStatus(int select, Mission mission) {
         System.out.print("Select status of mission: "
                 + "\nPress 1 for Planning Phase"
@@ -763,7 +720,9 @@ public class MissionToMars {
     }
 
 
-
+    /**
+     * nevigates the delete option to the right method
+     */
 
     private void deleteEntries(int select, Mission mission) {
         switch (select) {
@@ -818,7 +777,6 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
     public void deleteCountriesAllowed(int select, Mission mission){
-//        mission.setCountriesAllowedAllowed((String) null); // or
 
         deleteCountriesAllowedOneByOne(select, mission);
         missionEditMenu(select, mission);
@@ -861,7 +819,7 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
-    // need change?
+
     public void deleteJob(int select, Mission mission){
         StringBuilder str = new StringBuilder();
         if (null != mission.getJob()) {
@@ -885,57 +843,23 @@ public class MissionToMars {
         missionEditMenu(select, mission);
     }
 
-    // need change?
+
     public void deleteCargoRequirement(int select, Mission mission){
         mission.setCargoRequirement(null);
         missionEditMenu(select, mission);
     }
 
-    // need change
+
     public void deleteStatus(int select, Mission mission){
         mission.setStatus(null);
         missionEditMenu(select, mission);
     }
 
 
-    private String displayCountry(SelectionCriteria s) {
-        String exp = "";
-        for (int i = 0; i < s.getExperience().size(); i++) {
-            if (i == 0) {
-                exp = String.valueOf(s.getExperience().get(i));
-            } else if (i > 0) {
-                exp = exp + "," + s.getExperience().get(i);
-            }
-        }
-        return exp;
-    }
 
-    private String createOcc(SelectionCriteria s) {
-        String occ = "";
-        for (int i = 0; i < s.getOccupation().size(); i++) {
-            if (i == 0) {
-                occ = String.valueOf(s.getOccupation().get(i));
-            } else if (i > 0) {
-                occ = occ + "," + s.getOccupation().get(i);
-            }
-        }
-        return occ;
-    }
-
-    private String createLan(SelectionCriteria s) {
-        String lan = "";
-        for (int i = 0; i < s.getLanguageSpoken().size(); i++) {
-            if (i == 0) {
-                lan = String.valueOf(s.getLanguageSpoken().get(i));
-            } else if (i > 0) {
-                lan = lan + "," + s.getLanguageSpoken().get(i);
-            }
-        }
-        return lan;
-    }
-
-
-
+    /**
+     * displays choise with message for integer select.
+     */
     private int inputInt(String displayMessage) {
         boolean notAnInt = true;
         int integer = 0;
@@ -955,6 +879,11 @@ public class MissionToMars {
         return integer;
     }
 
+
+
+    /**
+     * inserts user integer properly
+     */
     private int inputInt(String displayMessage, String finallyString) {
         boolean notAnInt = true;
         int integer = 0;
@@ -978,6 +907,10 @@ public class MissionToMars {
         return integer;
     }
 
+    /**
+     * inserts user String properly
+     */
+
     public String inputString(String displayMessage) {
         System.out.println(displayMessage);
         Scanner scan = new Scanner(System.in);
@@ -987,7 +920,9 @@ public class MissionToMars {
     }
 
 
-
+    /**
+     * inserts user value properly
+     */
 
     private int valueSelect(int min, int max) {
         int select = -1;
@@ -1008,6 +943,10 @@ public class MissionToMars {
         }
         return str;
     }
+
+    /**
+     * inserts date properly
+     */
 
     public Date insertDate(String displayMessage) {
 
@@ -1030,38 +969,12 @@ public class MissionToMars {
     }
 
     /**
-     * draws a line to separate a particular section from another.
+     * Reads the mission data from mission.csv
      */
     public void readMission() {
         ReadMission readMission = new ReadMission();
         ArrayList<Mission> missions = readMission.readMission();
-//        readMission.displayMission(missions);
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Please select the mission id");
-//        String missionId = inputString("Please select the mission id");
-//        sc.close();
-//        for(int i=0; i<missions.size(); i++) {
-//            if (Integer.toString(missions.get(i).getId()).equals(missionId)) {
-////                System.out.println(missions.get(i).getId());
-//                System.out.println(missions.get(i).getMissionName());
-//                System.out.println(missions.get(i).getLaunchDate());
-//                System.out.println(missions.get(i).getMissionOrigin());
-//                String countries = "";
-//                for (int j = 0; j < missions.get(i).getCountriesAllowed().size(); j++) {
-//                    countries = countries + missions.get(i).getCountriesAllowed().get(j) + " ";
-//                }
-//                System.out.println(countries);
-//                System.out.println(missions.get(i).getDuration());
-//                System.out.println(missions.get(i).getMissionType());
-//                System.out.println(missions.get(i).getJob());
-//                System.out.println(missions.get(i).getMissionDescription());
-//                System.out.println(missions.get(i).getEmploymentRequirements());
-//                System.out.println(missions.get(i).getSelectionCriteria());
-//                System.out.println(missions.get(i).getCargoRequirement());
-//                System.out.println(missions.get(i).getDestinationAddress());
-//                System.out.println(missions.get(i).getStatus());
-//            }
-//        }
+
         listOfMission = missions;
     }
 
@@ -1079,22 +992,6 @@ public class MissionToMars {
     }
 
 
-//    public static void main(String... args) {
-//
-//        login();
-//        readMission();
-//
-//
-//
-//
-////        idToEditView();
-////        missionCreateMenu();
-//
-//
-//
-//
-//
-//    }
 
 
 
