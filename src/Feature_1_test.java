@@ -1,8 +1,5 @@
 import main.java.missontomars.control.MissionToMars;
-import main.java.missontomars.model.Cargo;
-import main.java.missontomars.model.CargoRequirement;
-import main.java.missontomars.model.Job;
-import main.java.missontomars.model.Mission;
+import main.java.missontomars.model.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -52,11 +49,29 @@ public class Feature_1_test {
         k.setCargoRequirement(cr);
 
         Job job = new Job();
-        job.setJobName("This job");
+        job.setJobName("railways");
         job.setJobDescription("This job description");
         Job job2 = new Job();
-        job2.setJobName("Another job");
+        job2.setJobName("town planning");
         job2.setJobDescription("Another job description");
+
+        EmploymentRequirement empForJob = new EmploymentRequirement();
+        empForJob.setJobTitle("designer");
+        empForJob.setNumberEmployeeRequired(10);
+
+
+        EmploymentRequirement empForJob2  = new EmploymentRequirement();
+        empForJob2.setJobTitle("Carpenter");
+        empForJob2.setNumberEmployeeRequired(11);
+
+        EmploymentRequirement empForJob3  = new EmploymentRequirement();
+        empForJob3.setJobTitle("Architect");
+        empForJob3.setNumberEmployeeRequired(12);
+
+        job.setEmploymentRequirements(empForJob);
+        job.setEmploymentRequirements(empForJob2);
+        job.setEmploymentRequirements(empForJob3);
+        job2.setEmploymentRequirements(empForJob3);
 
         k.setJob(job);
         k.setJob(job2);

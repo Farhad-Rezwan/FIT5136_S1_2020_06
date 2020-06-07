@@ -59,8 +59,9 @@ public class Job {
         sb.append("\t \tjob description: " + jobDescription + "\n \t");
 
         // display employment requirement
+        sb.append("\t \t" + "Employment Requirements: \n \t");
         for (int i = 0; i < employmentRequirements.size(); i++) {
-            sb.append( "\n \t \t \t" + (i + 1) + ": " + employmentRequirements.get(i).displayJobTitles());
+            sb.append( "\t \t \t" + (i + 1) + ": " + employmentRequirements.get(i).displayJobTitles() + "\n \t");
         }
         sb.append("\n");
 

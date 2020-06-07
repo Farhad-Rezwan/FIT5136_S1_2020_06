@@ -55,15 +55,34 @@ public class CargoRequirement {
                     this.cargoFor.add(cargoForArrayPredefinedList.get(i));
                 }
             }
+<<<<<<< HEAD
 
 //            for (String cargoForPredefined: cargoForArrayPredefinedList) {
 //                if (cargoForPredefined.trim().toUpperCase().contains(singleCargoForParam.trim().toUpperCase())) {
 //                    this.cargoFor.add(cargoForPredefined);
 //                }
 //            }
+=======
+>>>>>>> master
         }
         this.cargoFor = cargoFor;
     }
+
+    public void setCargoFor(String cargoFor) {
+        ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
+        cargoForArrayPredefinedList.add("Mission");
+        cargoForArrayPredefinedList.add("Journey");
+        cargoForArrayPredefinedList.add("Other mission");
+
+
+        for (int i = 0; i < cargoForArrayPredefinedList.size(); i++) {
+            if (cargoFor.trim().toUpperCase().equals(cargoForArrayPredefinedList.get(i).trim().toUpperCase())) {
+                this.cargoFor.add(cargoForArrayPredefinedList.get(i)) ;
+                break;
+            }
+        }
+    }
+
 
     public ArrayList<String> getCargoRequired() {
         return cargoRequired;
@@ -78,7 +97,7 @@ public class CargoRequirement {
     }
 
     public void setCargoRequired(String cargo) {
-        this.cargoRequired = cargoRequired;
+        this.cargoRequired.add(cargo);
     }
 
     public ArrayList<Cargo> getCargoList() {
