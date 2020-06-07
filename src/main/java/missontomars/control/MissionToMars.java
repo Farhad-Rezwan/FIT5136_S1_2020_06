@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 public class MissionToMars {
     private static String userType;
-    ArrayList<Mission> listOfMission;
-    ArrayList<Shuttle> listOfShuttle;
+    private static ArrayList<Mission> listOfMission;
+    private static ArrayList<Shuttle> listOfShuttle;
     //String userType;
 
 
@@ -38,9 +38,9 @@ public class MissionToMars {
         userType = user.getAccountType();
 
         //Feature2 starts here
-        GetShuttle getShuttle = new GetShuttle();
-        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
-        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
+//        GetShuttle getShuttle = new GetShuttle();
+//        ArrayList<String[]> shuttleSelected = getShuttle.readShuttle();
+//        Shuttle shuttle = getShuttle.selectShuttle(shuttleSelected);
     }
 
     public ArrayList<Mission> getListOfMission() {
@@ -243,7 +243,7 @@ public class MissionToMars {
 
     }
 
-    private void idToEditView() {
+    public void idToEditView() {
         int numberOfMission = listOfMission.size();
         StringBuilder sb = new StringBuilder();
 
@@ -969,6 +969,7 @@ public class MissionToMars {
         System.out.println(displayMessage);
         Scanner scan = new Scanner(System.in);
         String temp = scan.nextLine();
+//        scan.closea();
         return temp;
     }
 
@@ -1018,20 +1019,56 @@ public class MissionToMars {
     /**
      * draws a line to separate a particular section from another.
      */
-    private void drawOneLine()
-    {
-        int lineWaveNumber = (20 *4);
-        int countWave;
-
-        System.out.println();
-        System.out.println();
-        for ( countWave = 1; countWave < lineWaveNumber; countWave++)
-        {
-            System.out.print("~");
+    public void readMission() {
+        ReadMission readMission = new ReadMission();
+        ArrayList<Mission> missions = readMission.readMission();
+        readMission.displayMission(missions);
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Please select the mission id");
+        String missionId = inputString("Please select the mission id");
+//        sc.close();
+        for(int i=0; i<missions.size(); i++) {
+            if (Integer.toString(missions.get(i).getId()).equals(missionId)) {
+                System.out.println(missions.get(i).getId());
+                System.out.println(missions.get(i).getMissionName());
+                System.out.println(missions.get(i).getLaunchDate());
+                System.out.println(missions.get(i).getMissionOrigin());
+                String countries = "";
+                for (int j = 0; j < missions.get(i).getCountriesAllowed().size(); j++) {
+                    countries = countries + missions.get(i).getCountriesAllowed().get(j) + " ";
+                }
+                System.out.println(countries);
+                System.out.println(missions.get(i).getDuration());
+                System.out.println(missions.get(i).getMissionType());
+                System.out.println(missions.get(i).getJob());
+                System.out.println(missions.get(i).getMissionDescription());
+                System.out.println(missions.get(i).getEmploymentRequirements());
+                System.out.println(missions.get(i).getSelectionCriteria());
+                System.out.println(missions.get(i).getCargoRequirement());
+                System.out.println(missions.get(i).getDestinationAddress());
+                System.out.println(missions.get(i).getStatus());
+            }
         }
-        System.out.println();
-        System.out.println();
+        listOfMission = missions;
     }
+
+
+//    public static void main(String... args) {
+//
+//        login();
+//        readMission();
+//
+//
+//
+//
+////        idToEditView();
+////        missionCreateMenu();
+//
+//
+//
+//
+//
+//    }
 
 
 

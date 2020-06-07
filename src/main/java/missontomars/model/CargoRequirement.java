@@ -38,35 +38,32 @@ public class CargoRequirement {
         return cargoFor;
     }
 
-//    public void setCargoFor(ArrayList<String> cargoFor) {
-//        this.cargoFor = cargoFor;
-//    }
-
-        public void setCargoFor(ArrayList<String> cargoFor) {
-        ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
-        cargoForArrayPredefinedList.add("Mission");
-        cargoForArrayPredefinedList.add("Journey");
-        cargoForArrayPredefinedList.add("Other mission");
-
-
-        for (String singleCargoForParam: cargoFor) {
-            for (int i = 0; i < cargoForArrayPredefinedList.size(); i++) {
-                if (singleCargoForParam.trim().toUpperCase().equals(cargoForArrayPredefinedList.get(i).trim().toUpperCase())) {
-                    this.cargoFor.add(cargoForArrayPredefinedList.get(i));
-                }
-            }
-<<<<<<< HEAD
-
-//            for (String cargoForPredefined: cargoForArrayPredefinedList) {
-//                if (cargoForPredefined.trim().toUpperCase().contains(singleCargoForParam.trim().toUpperCase())) {
-//                    this.cargoFor.add(cargoForPredefined);
-//                }
-//            }
-=======
->>>>>>> master
-        }
+    public void setCargoFor(ArrayList<String> cargoFor) {
         this.cargoFor = cargoFor;
     }
+
+//        public void setCargoFor(ArrayList<String> cargoFor) {
+//        ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
+//        cargoForArrayPredefinedList.add("Mission");
+//        cargoForArrayPredefinedList.add("Journey");
+//        cargoForArrayPredefinedList.add("Other mission");
+//
+//
+//        for (String singleCargoForParam: cargoFor) {
+//            for (int i = 0; i < cargoForArrayPredefinedList.size(); i++) {
+//                if (singleCargoForParam.trim().toUpperCase().equals(cargoForArrayPredefinedList.get(i).trim().toUpperCase())) {
+//                    this.cargoFor.add(cargoForArrayPredefinedList.get(i));
+//                }
+//            }
+//
+////            for (String cargoForPredefined: cargoForArrayPredefinedList) {
+////                if (cargoForPredefined.trim().toUpperCase().contains(singleCargoForParam.trim().toUpperCase())) {
+////                    this.cargoFor.add(cargoForPredefined);
+////                }
+////            }
+//        }
+//        this.cargoFor = cargoFor;
+//    }
 
     public void setCargoFor(String cargoFor) {
         ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();

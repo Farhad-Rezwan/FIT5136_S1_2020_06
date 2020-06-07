@@ -1,3 +1,5 @@
+package main.java.missontomars.model;
+
 import java.util.List;
 
 public class Candidate {

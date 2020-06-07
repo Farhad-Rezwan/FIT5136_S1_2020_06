@@ -25,6 +25,10 @@ public class Mission {
     ArrayList<EmploymentRequirement> employmentRequirements;
     private SelectionCriteria selectionCriteria;
 
+
+
+    Shuttle shuttle;
+
     public Mission() {
       selectionCriteria = new SelectionCriteria();
       missionType = "Planning Phase";
@@ -262,6 +266,13 @@ public class Mission {
 
 
         return sb.toString();
+    }
+    public Shuttle getShuttle() {
+        return shuttle;
+    }
+
+    public void setShuttle(Shuttle shuttle) {
+        this.shuttle = shuttle;
     }
 
 }

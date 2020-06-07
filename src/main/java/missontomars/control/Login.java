@@ -30,7 +30,7 @@ public class Login {
         String usernameInput = sc1.nextLine();
         System.out.println("Please input password");
         String passwordInput = sc1.nextLine();
-        sc1.close();
+//        sc1.close();
         User user = null;
         Boolean success = false;
         for(int i=0; i<allUser.size(); i++){
