@@ -9,6 +9,7 @@ public class CargoRequirement {
     private ArrayList<String> cargoFor;
     private ArrayList<String> cargoRequired;
     private int cargoQuantity;
+    private ArrayList<Integer> quantity;
     private ArrayList<Cargo> cargoList;
 
     public CargoRequirement() {
@@ -25,31 +26,44 @@ public class CargoRequirement {
         this.cargoList = cargoList;
     }
 
+    public ArrayList<Integer> getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(ArrayList<Integer> quantity) {
+        this.quantity = quantity;
+    }
+
     public ArrayList<String> getCargoFor() {
         return cargoFor;
     }
 
     public void setCargoFor(ArrayList<String> cargoFor) {
-        ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
-        cargoForArrayPredefinedList.add("Mission");
-        cargoForArrayPredefinedList.add("Journey");
-        cargoForArrayPredefinedList.add("Other mission");
-
-
-        for (String singleCargoForParam: cargoFor) {
-            for (int i = 0; i < cargoForArrayPredefinedList.size(); i++) {
-                if (singleCargoForParam.trim().toUpperCase().equals(cargoForArrayPredefinedList.get(i).trim().toUpperCase())) {
-                    this.cargoFor.add(cargoForArrayPredefinedList.get(i));
-                }
-            }
-//            for (String cargoForPredefined: cargoForArrayPredefinedList) {
-//                if (cargoForPredefined.trim().toUpperCase().contains(singleCargoForParam.trim().toUpperCase())) {
-//                    this.cargoFor.add(cargoForPredefined);
-//                }
-//            }
-        }
         this.cargoFor = cargoFor;
     }
+
+    //    public void setCargoFor(ArrayList<String> cargoFor) {
+//        ArrayList<String> cargoForArrayPredefinedList = new ArrayList<>();
+//        cargoForArrayPredefinedList.add("Mission");
+//        cargoForArrayPredefinedList.add("Journey");
+//        cargoForArrayPredefinedList.add("Other mission");
+//
+//
+//        for (String singleCargoForParam: cargoFor) {
+//            for (int i = 0; i < cargoForArrayPredefinedList.size(); i++) {
+//                if (singleCargoForParam.trim().toUpperCase().equals(cargoForArrayPredefinedList.get(i).trim().toUpperCase())) {
+//                    this.cargoFor.add(cargoForArrayPredefinedList.get(i));
+//                }
+//            }
+//
+////            for (String cargoForPredefined: cargoForArrayPredefinedList) {
+////                if (cargoForPredefined.trim().toUpperCase().contains(singleCargoForParam.trim().toUpperCase())) {
+////                    this.cargoFor.add(cargoForPredefined);
+////                }
+////            }
+//        }
+//        this.cargoFor = cargoFor;
+//    }
 
     public ArrayList<String> getCargoRequired() {
         return cargoRequired;

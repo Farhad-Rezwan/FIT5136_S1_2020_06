@@ -20,6 +20,7 @@ public class Mission {
     String missionType;
     ArrayList<Job> job;
     CargoRequirement cargoRequirement;
+    ArrayList<EmploymentRequirement> employmentRequirements;
     private SelectionCriteria selectionCriteria;
 
     public Mission() {
@@ -55,6 +56,14 @@ public class Mission {
 
     public void setSelectionCriteria(SelectionCriteria selectionCriteria) {
         this.selectionCriteria = selectionCriteria;
+    }
+
+    public ArrayList<EmploymentRequirement> getEmploymentRequirements() {
+        return employmentRequirements;
+    }
+
+    public void setEmploymentRequirements(ArrayList<EmploymentRequirement> employmentRequirements) {
+        this.employmentRequirements = employmentRequirements;
     }
 
     public int getId() {
