@@ -5,14 +5,12 @@ public class EmploymentRequirement {
     String jobTitle;
 
     public EmploymentRequirement() {
-        this.numberEmployeeRequired = 0;
     }
 
     public EmploymentRequirement(int numberEmployeeRequired, String jobTitle) {
         this.numberEmployeeRequired = numberEmployeeRequired;
         this.jobTitle = jobTitle;
     }
-
 
 
     public int getNumberEmployeeRequired() {

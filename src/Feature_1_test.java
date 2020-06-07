@@ -49,14 +49,14 @@ public class Feature_1_test {
         k.setCargoRequirement(cr);
 
         Job job = new Job();
-        job.setJobName("This job");
+        job.setJobName("railways");
         job.setJobDescription("This job description");
         Job job2 = new Job();
-        job2.setJobName("Another job");
+        job2.setJobName("town planning");
         job2.setJobDescription("Another job description");
 
         EmploymentRequirement empForJob = new EmploymentRequirement();
-        empForJob.setJobTitle("Builder");
+        empForJob.setJobTitle("designer");
         empForJob.setNumberEmployeeRequired(10);
 
 
