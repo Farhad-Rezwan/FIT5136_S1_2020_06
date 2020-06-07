@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Login {
+
+    /**
+     * Method which read user information from file
+     * @return A user information string list
+     */
     public ArrayList<String[]> readUser(){
         ArrayList<String[]> allUser = new ArrayList<>();
         try {
@@ -24,6 +29,12 @@ public class Login {
         }
         return allUser;
     }
+
+    /**
+     * Method for log in
+     * @param allUser A user information string list
+     * @return The login user
+     */
     public User login(ArrayList<String[]> allUser){
         Scanner sc1 = new Scanner(System.in);
         System.out.println("Please input username");

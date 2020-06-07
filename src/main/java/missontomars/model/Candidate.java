@@ -22,9 +22,15 @@ public class Candidate {
     private String criminalRecord;
     private String computerSkill;
 
+    /**
+     * Constructor
+     */
     public Candidate() {
     }
 
+    /**
+     * Constructor
+     */
     public Candidate(int id, String name, String dob, String city, String postal, String nationality, String identitification, String gender, ArrayList<String> allergies, ArrayList<String> foodPreference, ArrayList<String> qualification, ArrayList<String> occupation, ArrayList<String> languagesSpoken, ArrayList<Integer> workExperience, String healthRecord, String criminalRecord, String computerSkill) {
         this.id = id;
         this.name = name;
@@ -45,43 +51,82 @@ public class Candidate {
         this.computerSkill = computerSkill;
     }
 
-
+    /**
+     * Get id
+     * @return id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Set id
+     * @param id Candidate id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Get name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set name
+     * @param name candidate name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Get date of birth
+     * @return date of birth
+     */
     public String getDob() {
         return dob;
     }
 
+    /**
+     * Set date of birth
+     * @param dob date of birth
+     */
     public void setDob(String dob) {
         this.dob = dob;
     }
 
+    /**
+     * Get city
+     * @return city
+     */
     public String getCity() {
         return city;
     }
 
+    /**
+     * Set city
+     * @param city candidate city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Get postal
+     * @return postal
+     */
     public String getPostal() {
         return postal;
     }
 
+    /**
+     * Set postal
+     * @param postal candidate postal
+     */
     public void setPostal(String postal) {
         this.postal = postal;
     }
@@ -182,6 +227,10 @@ public class Candidate {
         this.computerSkill = computerSkill;
     }
 
+    /**
+     * Method which display the candidates information
+     * @return The display string
+     */
     public String displayCandidate() {
         StringBuilder sb = new StringBuilder();
         sb.append(" \n");

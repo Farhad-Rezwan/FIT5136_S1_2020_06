@@ -128,6 +128,10 @@ public class Mission {
         return destinationAddress;
     }
 
+    /**
+     * Method which set the information of destination
+     * @param destinationAddress A string of destination address
+     */
     public void setDestinationAddress(String destinationAddress) {
         if (null != destinationAddress) {
             ArrayList<String> missionDestinationList = new ArrayList<>();
@@ -167,6 +171,10 @@ public class Mission {
         return status;
     }
 
+    /**
+     * Method which set mission status
+     * @param status Mission status
+     */
     public void setStatus(String status) {
         if (null != status) {
             ArrayList<String> statusList = new ArrayList<>();
@@ -223,7 +231,10 @@ public class Mission {
         this.cargoRequirement = cargoRequirement;
     }
 
-
+    /**
+     * Method which display the mission
+     * @return A display string
+     */
     public String displayMission() {
         StringBuilder sb = new StringBuilder();
         sb.append(" \n");

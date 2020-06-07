@@ -14,6 +14,10 @@ public class EmployFast {
 
     }
 
+    /**
+     * Method which show the view to set criteria
+     * @param mission The selected mission in feature 1
+     */
     public void criteriaMenu(Mission mission) {
         int select = inputInt("\nPress 1 for range of age"
                 + "\nPress 2 for qualification"
@@ -35,6 +39,10 @@ public class EmployFast {
         }
     }
 
+    /**
+     * Method show all the criteria information
+     * @param mission The selected mission in feature 1
+     */
     private void viewAllCre(Mission mission) {
         System.out.println("range of age: " + mission.getSelectionCriteria().getMinimumAge() + "-" + mission.getSelectionCriteria().getMaximumAge());
         System.out.println("qualification: " + createQuaStr(mission.getSelectionCriteria()));
@@ -54,6 +62,11 @@ public class EmployFast {
 
     }
 
+    /**
+     * Method which view for add or delete selected criteria
+     * @param select The number of selected criteria
+     * @param mission The selected mission in feature1
+     */
     private void criteriaEditMenu(int select, Mission mission) {
         SelectionCriteria s = mission.getSelectionCriteria();
         boolean check = true;
@@ -91,28 +104,28 @@ public class EmployFast {
             }
             if (editSelect == 1) {
                 if (select == 1) {
-                    addAgeRange(s, select);
+                    addAgeRange(s);
                 }
                 if (select == 2) {
-                    addQualification(select, s);
+                    addQualification(s);
                 }
                 if (select == 3) {
-                    addWorkExp(select, s);
+                    addWorkExp(s);
                 }
                 if (select == 4) {
-                    addOcc(select, s);
+                    addOcc(s);
                 }
                 if (select == 5) {
-                    addHealth(select, s);
+                    addHealth(s);
                 }
                 if (select == 6) {
-                    addCri(select, s);
+                    addCri(s);
                 }
                 if (select == 7) {
-                    addComSkill(select, s);
+                    addComSkill(s);
                 }
                 if (select == 8) {
-                    addLanguage(select, s);
+                    addLanguage(s);
                 }
             } else if (editSelect == 2) {
                 delete(select, s);
@@ -124,7 +137,11 @@ public class EmployFast {
         criteriaMenu(mission);
     }
 
-    private void addAgeRange(SelectionCriteria s, int select) {
+    /**
+     * Method which set age range
+     * @param s The selection criteria of the mission
+     */
+    private void addAgeRange(SelectionCriteria s) {
         int minAge = inputInt("Please enter the minimum age");
         int maxAge = inputInt("please enter the maximum age");
         while (minAge >= maxAge) {
@@ -134,66 +151,91 @@ public class EmployFast {
         }
         s.setMinimumAge(minAge);
         s.setMaximumAge(maxAge);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addQualification(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set qualification
+     * @param s The selection criteria of the mission
+     */
+    private void addQualification(SelectionCriteria s) {
+
         String qua = inputString("Please add the qualification (only one at a time)");
         ArrayList<String> newQua = s.getQualification();
         newQua.add(qua);
         s.setQualification(newQua);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addWorkExp(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set work experience
+     * @param s The selection criteria of the mission
+     */
+    private void addWorkExp(SelectionCriteria s) {
         int workExp = inputInt("Please input the work experience (only one at a time)");
         ArrayList<Integer> newWorkExp = s.getExperience();
         newWorkExp.add(workExp);
         s.setExperience(newWorkExp);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addOcc(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set occupation
+     * @param s The selection criteria of the mission
+     */
+    private void addOcc(SelectionCriteria s) {
+
         String occ = inputString("Please add the occupation (only one at a time)");
         ArrayList<String> newOcc = s.getOccupation();
         newOcc.add(occ);
         s.setOccupation(newOcc);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addHealth(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set health record
+     * @param s The selection criteria of the mission
+     */
+    private void addHealth(SelectionCriteria s) {
+
         String health = inputString("Please add the health record");
         s.setHealthRecord(health);
-        //criteriaEditMenu(select, s);
+
     }
 
-    private void addCri(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set criminal record
+     * @param s The selection criteria of the mission
+     */
+    private void addCri(SelectionCriteria s) {
+
         String cri = inputString("Please add the criminal record");
         s.setCriminalRecord(cri);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addComSkill(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set computer skill
+     * @param s The selection criteria of the mission
+     */
+    private void addComSkill(SelectionCriteria s) {
+
         String com = inputString("Please add the computer skill");
         s.setHealthRecord(com);
-        //criteriaEditMenu(select, s);
     }
 
-    private void addLanguage(int select, SelectionCriteria s) {
-        System.out.print('\u000C');
+    /**
+     * Method which set language
+     * @param s The selection criteria of the mission
+     */
+    private void addLanguage(SelectionCriteria s) {
+
         String lan = inputString("Please add the language (only one at a time)");
         ArrayList<String> newLan = s.getLanguageSpoken();
         newLan.add(lan);
         s.setLanguageSpoken(newLan);
-        //criteriaEditMenu(select, s);
     }
 
+    /**
+     * Method which delete criteria
+     * @param select The selection criteria of the mission
+     * @param s The selection criteria of the mission
+     */
     private void delete(int select, SelectionCriteria s){
         if (select == 1){
             int i = inputInt(s.getMinimumAge() + "-" + s.getMaximumAge()
@@ -203,10 +245,8 @@ public class EmployFast {
             if (i == 1){
                 s.setMinimumAge(0);
                 s.setMaximumAge(0);
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 2){
@@ -220,10 +260,8 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getQualification().size(),selection);
                 s.getQualification().remove((selection - 1));
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 3){
@@ -236,10 +274,8 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getExperience().size(),selection);
                 s.getExperience().remove((selection - 1));
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 4){
@@ -255,7 +291,6 @@ public class EmployFast {
                 //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 5){
@@ -264,10 +299,8 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setHealthRecord("");
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 6){
@@ -276,10 +309,9 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setCriminalRecord("");
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
+
             }
         }
         if (select == 6){
@@ -288,10 +320,8 @@ public class EmployFast {
             i = valueSelect(0,1,i) ;
             if (i == 1){
                 s.setComputerSkill("");
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
         if (select == 7){
@@ -304,15 +334,17 @@ public class EmployFast {
                 int selection = inputInt("Please select the number");
                 selection = valueSelect(1,s.getLanguageSpoken().size(),selection);
                 s.getExperience().remove((selection - 1));
-                //criteriaEditMenu(select, s);
             }
             else if(i == 0){
-                //criteriaEditMenu(select, s);
             }
         }
     }
 
-
+    /**
+     * Method which input String
+     * @param displayMessage Message to display
+     * @return A string of the user input
+     */
     public String inputString(String displayMessage) {
         System.out.println(displayMessage);
         Scanner scan = new Scanner(System.in);
@@ -320,7 +352,11 @@ public class EmployFast {
         return temp;
     }
 
-
+    /**
+     * Method which input int
+     * @param displayMessage Message to display
+     * @return An int of the user input
+     */
     private int inputInt(String displayMessage) {
         boolean notAnInt = true;
         int integer = 0;
@@ -340,6 +376,14 @@ public class EmployFast {
         return integer;
     }
 
+
+    /**
+     * Method which value the input
+     * @param min The smallest int
+     * @param max The biggest int
+     * @param select User selection
+     * @return Valued int
+     */
     private int valueSelect(int min, int max, int select) {
         while (!(min <= select & select <= max)) {
             select = inputInt("Please select the right option");
@@ -347,6 +391,12 @@ public class EmployFast {
         return select;
     }
 
+
+    /**
+     * Method which show qualification
+     * @param s The selection criteria of the mission
+     * @return A display string
+     */
     private String createQuaStr(SelectionCriteria s) {
         String str = "";
         for (int i = 0; i < s.getQualification().size(); i++) {
@@ -359,6 +409,11 @@ public class EmployFast {
         return str;
     }
 
+     /** Method which check criteria can be deleted or not
+     * @param select The selection number of user
+     * @param s The selection criteria of the mission
+     * @return A boolean show whether the criteria is empty or not
+     */
     private boolean checkEmpty(int select, SelectionCriteria s){
         boolean isEmpty = true;
         if (select == 1){
@@ -402,6 +457,11 @@ public class EmployFast {
         return isEmpty;
     }
 
+    /**
+     * Method which show work experience
+     * @param s Selection criteria
+     * @return A display string
+     */
     private String createWorExp(SelectionCriteria s) {
         String exp = "";
         for (int i = 0; i < s.getExperience().size(); i++) {
@@ -414,6 +474,11 @@ public class EmployFast {
         return exp;
     }
 
+    /**
+     * Method which show occupation
+     * @param s Selection criteria
+     * @return A display string
+     */
     private String createOcc(SelectionCriteria s) {
         String occ = "";
         for (int i = 0; i < s.getOccupation().size(); i++) {
@@ -426,6 +491,11 @@ public class EmployFast {
         return occ;
     }
 
+    /**
+     * Method which show language
+     * @param s Selection criteri
+     * @return A display string
+     */
     private String createLan(SelectionCriteria s) {
         String lan = "";
         for (int i = 0; i < s.getLanguageSpoken().size(); i++) {

@@ -14,9 +14,16 @@ public class ReadMission {
 
     ArrayList<Mission> missions = new ArrayList<>();
 
+    /**
+     * Constructor
+     */
     public ReadMission() {
     }
 
+    /**
+     * Method for read mission information from file and create a mission arrayList
+     * @return A arrayList of mission
+     */
     public ArrayList<Mission> readMission() {
         DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         SelectionCriteria selectionCriteria = new SelectionCriteria();
@@ -122,6 +129,10 @@ public class ReadMission {
         return missions;
     }
 
+    /**
+     * Method which display the reading method
+     * @param missions An arrayList of Mission read from the file
+     */
     public void displayMission(ArrayList<Mission> missions){
         for(int i=0; i<missions.size(); i++){
             System.out.println(missions.get(i).getId());
